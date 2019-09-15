@@ -209,6 +209,13 @@ class Ui_MainWindow(object):
                 connexionThread.accNames.append(self.listWidget.item(i).text().lower())
 
         if len(connexionThread.accNames) > 0:
+            if not exists(config["General"]["al_path"]):
+                self.error_msg.setText("Le chemin vers Ankama Launcher est invalide !\nUne fenêtre vous demandant d'ouvrir le .exe d'Ankama Launcher va s'ouvrir...")
+                self.error_msg.exec_()
+                fileName = QtWidgets.QFileDialog.getOpenFileName(caption="Sélectionnez Ankama Launcher", directory="C:\\",filter="Exe Files (*.exe)")
+                config.set("General","al_path",fileName[0].replace('/','\\'))
+                with open('config.ini', 'w') as configfile:
+                    config.write(configfile)
             connexionThread.start()
         else:
             self.error_msg.setText("Aucun compte sélectionné !")
