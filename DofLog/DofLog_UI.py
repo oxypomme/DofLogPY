@@ -237,7 +237,6 @@ class Ui_MainWindow(object):
         try:
             name = self.listWidget.currentItem().text().lower()
             accounts = list(config.items('Accounts'))
-            print(accounts)
             for i in range(len(accounts)):
                 if accounts[i][0] == name:
                     id = i
@@ -257,7 +256,21 @@ class Ui_MainWindow(object):
             self.error_msg.exec_()
     def downList(self):
         try:
-            print(self.listWidget.currentItem().text().lower())
+            name = self.listWidget.currentItem().text().lower()
+            accounts = list(config.items('Accounts'))
+            print(accounts)
+            for i in range(len(accounts)):
+                if accounts[i][0] == name:
+                    id = i
+                    break
+            if id < len(accounts)-1:
+                accounts[id], accounts[id+1] = accounts[id+1], accounts[id]
+                config.remove_section('Accounts')
+                config.add_section("Accounts")
+                for i in range(len(accounts)):
+                    config.set("Accounts", accounts[i][0], accounts[i][1])
+                with open('config.ini', 'w') as configfile:
+                    config.write(configfile)
             self.reloadList()
         except AttributeError:
             self.error_msg.setText("Aucun compte sélectionné !")
