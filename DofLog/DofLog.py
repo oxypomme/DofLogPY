@@ -13,8 +13,6 @@ from pyautogui import *
 
 import win32gui
 
-# TODO : Verifier si update dispo, si oui > updater.exe
-
 PAUSE = 0.25
 FAILSAFE = True
 
