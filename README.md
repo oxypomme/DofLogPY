@@ -9,7 +9,7 @@
   - [Installation](#installation)
   - [Développé avec](#d%c3%a9velopp%c3%a9-avec)
   - [Versioning](#versioning)
-  - [Release History](#release-history)
+  - [Historique des Versions](#release-history)
   - [Auteur](#auteur)
   - [Licence](#licence)
   - [Contribute](#contribute)
