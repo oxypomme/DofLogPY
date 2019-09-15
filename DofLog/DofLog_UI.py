@@ -197,9 +197,7 @@ class Ui_MainWindow(object):
             remove(join(getcwd(), 'Organizer.zip'))
             toaster_thread.message = "Téléchargement d'Organizer terminé !"
             toaster_thread.isShowing = True
-            self.organizerLink()
-        else:
-            Popen(join(getcwd(), r'Modules/Organizer.exe'), stdout=DEVNULL)
+        Popen(join(getcwd(), r'Modules/Organizer.exe'), stdout=DEVNULL)
 
     def connectAction(self):
         connexionThread = logDof()
