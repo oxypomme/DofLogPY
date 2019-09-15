@@ -234,10 +234,34 @@ class Ui_MainWindow(object):
             config.write(configfile)
 
     def upList(self):
-        #TODO UI 01 : Changer de place les comptes
-        print("wipUP")
+        try:
+            name = self.listWidget.currentItem().text().lower()
+            accounts = list(config.items('Accounts'))
+            print(accounts)
+            for i in range(len(accounts)):
+                if accounts[i][0] == name:
+                    id = i
+                    break
+            if id > 0:
+                accounts[id], accounts[id-1] = accounts[id-1], accounts[id]
+                print(accounts)
+                config.remove_section('Accounts')
+                config.add_section("Accounts")
+                for i in range(len(accounts)):
+                    config.set("Accounts", accounts[i][0], accounts[i][1])
+                with open('config.ini', 'w') as configfile:
+                    config.write(configfile)
+            self.reloadList()
+        except AttributeError:
+            self.error_msg.setText("Aucun compte sélectionné !")
+            self.error_msg.exec_()
     def downList(self):
-        print("wipDO")
+        try:
+            print(self.listWidget.currentItem().text().lower())
+            self.reloadList()
+        except AttributeError:
+            self.error_msg.setText("Aucun compte sélectionné !")
+            self.error_msg.exec_()
         
     
 if __name__ == "__main__":
