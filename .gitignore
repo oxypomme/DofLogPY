@@ -352,3 +352,6 @@ MigrationBackup/
 DofLog/build/
 DofLog/dist/
 DofLog/Modules/
+
+#Config file
+DofLog/config.ini

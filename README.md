@@ -45,13 +45,13 @@ Téléchargez la dernière version dans l'onglet [releases](https://github.com/o
 
 OS X & Linux:
 
-```sh
+```md
 Non supporté
 ```
 
 Windows:
 
-```sh
+```md
 Téléchargez la dernière version.
 Installez.
 Jouez !
@@ -69,7 +69,7 @@ Jouez !
 
 J'utilise [SemVer](http://semver.org/) pour le versioning. Pour la liste complète des versions, visitez les [tags de ce repo](https://github.com/oxypomme/DofLog/tags).
 
-## Release History
+## Historique des Versions
 
 - 0.1.1
   - Changer l'ordre de la liste directement depuis le programme
