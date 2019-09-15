@@ -145,6 +145,7 @@ class logDof(Thread):
         if self.__focusOnWindow(title="Ankama Launcher"):
                 return
         Popen(config["General"]["al_path"], stdout=DEVNULL)
+        #TODO 01 - PRIORITE ABSOLUE : Si AL est pas au bon endroit ?
     def __logAL(self, username, password):
         while not self.__isLogable(560,515)==(130,141,148):
             sleep(1)

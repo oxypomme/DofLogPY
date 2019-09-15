@@ -1,89 +1,109 @@
 # DofLog
 
-> DofLog est un outil de connexion automatique pour Dofus 64bits.
+> DofLog est un outil de connexion automatique pour Dofus 64bits développé en Python.
 
-## Getting Started
+<img src="DofLog/icon.ico" alt="drawing" width="100"/>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+- [DofLog](#doflog)
+  - [Pourquoi faire](#pourquoi-faire)
+  - [Installation](#installation)
+  - [Développé avec](#d%c3%a9velopp%c3%a9-avec)
+  - [Versioning](#versioning)
+  - [Release History](#release-history)
+  - [Auteur](#auteur)
+  - [Licence](#licence)
+  - [Contribute](#contribute)
+  - [Remerciements](#remerciements)
 
-### Prerequisites
+## Pourquoi faire
 
-What things you need to install the software and how to install them
+Marre d'avoir des crash toutes les 5 minutes de jeu ? Vous avez un ordinateur tournant en 64 Bits ? Alors la version de Dofus en 64 Bits peut vous intéresser !
 
-```
-Give examples
-```
+Malheureusement, connecter plusieurs compte est long et fastidieux...\
+Mais pour cela il existe des outils, notamment le [nAiO](https://naio.fr/), de ZDS, qui connecte à notre place tout nos comptes. Mais il ne marche qu'en 32Bits.
 
-### Installing
+C'est pourquoi j'ai développé `DofLog`, un outil pour se connecter automatiquement à Dofus en passant par l'Anakama Launcher !
 
-A step by step series of examples that tell you how to get a development env running
+![Header](header.png)\
+<font size="2">*DofLog dans sa version 0.1.1*</font>
 
-Say what the step will be
+## Installation
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```md
+Installer la dernière version de l'Ankama Launcher.
+Connectez vous avec un compte (n'importe lequel, on va régler 2~3 trucs).
+Installez Dofus.
+Pendant ce temps, cliquez sur la petite roue dentée (Paramètres) et
+    Vérifiez que le Launcher ne se réduit pas dans la zone de notification après le lancement d'un jeu.
+    A la réduction d'Ankama Launcher, il se réduise dans la barre des tâches.
+Déconnectez vous.
 ```
 
-### And coding style tests
+> **Note :** Evitez de bouger la fenêtre de l'[Anakama Launcher](https://www.ankama.com/fr/launcher)
 
-Explain what these tests test and why
+Téléchargez la dernière version dans l'onglet [releases](https://github.com/oxypomme/DofLog/releases).
 
+OS X & Linux:
+
+```sh
+Non supporté
 ```
-Give an example
+
+Windows:
+
+```sh
+Téléchargez la dernière version.
+Installez.
+Jouez !
 ```
 
-## Deployment
+## Développé avec
 
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+- [cx_Freeze](https://anthony-tuininga.github.io/cx_Freeze/)
+- [PyAutoGui](https://pypi.org/project/PyAutoGUI/)
+- [PyQt5](https://www.riverbankcomputing.com/software/pyqt/intro)
+- [wget](https://pypi.org/project/wget/)
+- [Win10Toast](https://pypi.org/project/win10toast/)
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/oxypomme/DofLog/tags). 
+J'utilise [SemVer](http://semver.org/) pour le versioning. Pour la liste complète des versions, visitez les [tags de ce repo](https://github.com/oxypomme/DofLog/tags).
 
-## Authors
+## Release History
 
-* **OxyTom** - *Initial work* - [OxyTom](https://github.com/oxypomme)
+- 0.1.1
+  - Changer l'ordre de la liste directement depuis le programme
+  - Indication de la position de l'Ankama Launcher lors de la première connexion (si il est introuvable par le programme)
+  - Fixed : Connexion infinie
+- 0.1.0
+  - Ajout de comptes
+  - Suppressions de comptes
+  - Notifications Windows 10
+  - Connexion automatique
+  - Possibilité de rester connecté à l'Ankama Launcher après avoir lancé Dofus
+  - Paramètre pour mettre le nom de comptes en majuscules (dans `config.ini`)
 
-See also the list of [contributors](https://github.com/oxypomme/DofLog/contributors) who participated in this project.
+## Auteur
 
-## License
+- [**OxyTom**](https://github.com/oxypomme) - [@OxyTom](https://twitter.com/OxyT0m8)
+
+Lisez la liste des [contributeurs](https://github.com/oxypomme/DofLog/contributors) qui ont participé à ce projet.
+
+## Licence
 
 [![CCA-SA_4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/").
 
-## Acknowledgments
+## Contribute
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+1. Fork it (<https://github.com/oxypomme/DofLog/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## Remerciements
+
+- Le [nAiO](https://naio.fr/), de ZDS, pour son concept.
+- [Dofus](https://dofus.com/fr), développé par Ankama, pour continuer à nous amusez après tant d'années.
