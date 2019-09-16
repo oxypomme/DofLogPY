@@ -45,7 +45,8 @@ class logDof(Thread):
             toastMessage = "Pas de comptes enregistrés !"
         else:
             self.__startAL()
-            if not (__isLogable == (134,182,68) or __isLogable == (133,181,68)):
+            isLog = self.__isLogable(585,505)
+            if not (isLog == (134,182,68) or isLog == (133,181,68)):
                 self.__logAL(usernames[0],passwords[0])
             dofIDs.append(self.__startDof())
             while not self.__isLogable(1200,835) == (214,246,0):
