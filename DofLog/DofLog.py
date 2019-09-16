@@ -141,7 +141,7 @@ class logDof(Thread):
             win32gui.ShowWindow(id,5)
             win32gui.SetForegroundWindow(id)
 
-    def startAL(self):
+    def __startAL(self):
         if self.__focusOnWindow(title="Ankama Launcher"):
                 return
         Popen(config["General"]["al_path"], stdout=DEVNULL)
