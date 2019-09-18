@@ -13,19 +13,22 @@ from pyautogui import *
 
 import win32gui
 
-PAUSE = 0.25
-FAILSAFE = True
+PAUSE = 0.25 # Pause entre chaque action
+FAILSAFE = True # Si la souris est bougé vers le coin en haut à gauche de l'écran le programme s'arrête
 
 df_windowTitle = "DofLog"
-df_version = "0.1.1" # Version.SousVersion.Build | Version = 0 : Beta/Alpha | SousVersion = 0 : Alpha
+df_version = "0.1.1"
 
-config = ConfigParser()
+config = ConfigParser() # Fichier config
 
 class AccountNotFoundError(Exception):
+    """
+        Si un compte demandé n'est pas trouvé
+    """
     pass
 
 class logDof(Thread):
-    accNames = []
+    accNames = [] # Variable modifiée pour savoir quels comptes connecter
 
     def __init__(self):
         Thread.__init__(self)
@@ -34,8 +37,8 @@ class logDof(Thread):
         nbAcc = len(self.accNames)
         usernames = []
         passwords = []
-        dofIDs = []
-        toastMessage = ""
+        dofIDs = [] # Liste des processid des fenêtres Dofus
+        toastMessage = "" # Message envoyé par la notification Win10
 
         try:
             for i in range(nbAcc):
@@ -45,11 +48,12 @@ class logDof(Thread):
             toastMessage = "Pas de comptes enregistrés !"
         else:
             self.__startAL()
-            isLog = self.__isLogable(585,505)
+            isLog = self.__isLogable(585,505) # Vérifie si le programme peut lancer Dofus
             if not (isLog == (134,182,68) or isLog == (133,181,68)):
                 self.__logAL(usernames[0],passwords[0])
             dofIDs.append(self.__startDof())
             while not self.__isLogable(1200,835) == (214,246,0):
+                # Vérifie si le compte est bien connecté
                 if self.__isLogable(955,585) == (214,246,0):
                     self.__logDof(dofIDs[0],usernames[0],passwords[0])
                 else:
@@ -72,13 +76,20 @@ class logDof(Thread):
             toaster_thread.isShowing = True
             self.__resetVars()
 
+    ### RECUPERATION DU COMPTE ###
     def __getUsername(self, name):
+        """
+           Récupère le nom d'utilisateur pour le compte demandé
+        """
         if "Accounts" in config:
                 user = config["Accounts"][name.lower()]
                 user_logs = user.split('/')
                 return bytearray.fromhex(user_logs[0]).decode()
         raise AccountNotFoundError
     def __getPassword(self, name):
+        """
+            Récupère le mot de passe pour le compte demandé
+        """
         if "Accounts" in config:
             try:
                 user = config["Accounts"][name.lower()]
@@ -88,17 +99,29 @@ class logDof(Thread):
                 pass
         raise AccountNotFoundError
 
+    ### VERFICATION DE L'ETAT DE LA FENETERE ###
     def __isLogable(self, startX, startY):
+        """
+            Retourne la couleur du pixel indiqué
+        """
         color = ImageGrab.grab((startX, startY, startX+1, startY+1)).load()[0,0]
         return color
 
+    ### ECRITURE DU MOT DE PASSE ###
     def __special_char(self, passwd, key):
+        """
+            Écrit les précédentes lettres du mot de passe avant d'écrire le caractère spécial
+            NON SUPPORTÉ : #
+        """
         typewrite(passwd)
         press('capslock')
         press(key)
         press('capslock')
-        return ""
+        return "" # Sert à reset la suite de lettres alphanumériques du mot de passe
     def __typepassword(self, password):
+        """
+            Écrit le mot de passe en prenant en compte les caractères spéciaux
+        """
         passwd = ""
         for c in password:
             if c == 'é':
@@ -125,9 +148,13 @@ class logDof(Thread):
                 passwd+=c
         typewrite(passwd)
 
+    ### GESTION DES FENÊTRES ###
     def __windowEnumerationHandler(self, hwnd, top_windows):
         top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
     def __focusOnWindow(self, title=None, id=None):
+        """
+            Met au premier plan la fenêtre avec le nom/processid correspondant
+        """
         if title!=None:
             results = []
             top_windows = []
@@ -142,14 +169,21 @@ class logDof(Thread):
             win32gui.ShowWindow(id,5)
             win32gui.SetForegroundWindow(id)
 
+    ### DEMARRAGE DE L'ANKAMA LAUNCHER ###
     def __startAL(self):
+        """
+            Met l'Ankama Launcher si ce dernier est lancé, sinon le lance
+        """
         if self.__focusOnWindow(title="Ankama Launcher"):
                 return
         Popen(config["General"]["al_path"], stdout=DEVNULL)
     def __logAL(self, username, password):
+        """
+            Se connecte à L'Ankama Launcher avec le premier compte
+        """
         while not self.__isLogable(560,515)==(130,141,148):
             sleep(1)
-        moveTo(620, 340)
+        moveTo(620, 340) # Position du champ "Nom de compte" de l'AL
         click()
         hotkey('ctrl', 'a')
         press('backspace')
@@ -161,29 +195,38 @@ class logDof(Thread):
         self.__typepassword(password)
 
         while not self.__isLogable(560,515)==(254,252,250):
+            # Tant que le programme ne peut se connecter
             sleep(1)
-        moveTo(560, 515)
+        moveTo(560, 515) # Se connecte
         click()
 
     def __startDof(self):
+        """
+            Lance Dofus et retourne son processid
+        """
         self.__focusOnWindow(title="Ankama Launcher")
-        moveTo(395, 270)
+        moveTo(395, 270) # Clique sur l'onglet Dofus
         click()
         while True:
             isLog = self.__isLogable(585,505)
+            # Vérifie si le programme peut lancer Dofus
             if isLog == (134,182,68) or isLog == (133,181,68):
                 break
             sleep(1)
-        moveTo(585, 505)
+        moveTo(585, 505) # Lance Dofus
         click()
         while not win32gui.GetWindowText(win32gui.GetForegroundWindow()) == "Dofus":
             sleep(1)
         return win32gui.GetForegroundWindow()
     def __logDof(self, windowID, username, password):
+        """
+            Se connecte à Dofus (nécessite l'entrée d'un processid)
+        """
         self.__focusOnWindow(id=windowID)
         while not self.__isLogable(955,585)==(214,246,0):
+            # Tant que le programme ne peut se connecter à Dofus
             sleep(1)
-        moveTo(945, 350)
+        moveTo(945, 350) # Position du champ "Nom de compte" de Dofus
         click()
         hotkey('ctrl', 'a')
         press('backspace')
@@ -194,12 +237,12 @@ class logDof(Thread):
         press('backspace')
         self.__typepassword(password)
 
-        press('enter')
+        press('enter') # Se connecte
     def __unlogAL(self, dofWinID):
         self.__focusOnWindow(title="Ankama Launcher")
-        moveTo(1535, 205)
+        moveTo(1535, 205) # Postition de la gestion de compte sur AL
         click()
-        moveTo(1535, 325)
+        moveTo(1535, 325) # Postition du bouton deconnexion sur AL
         click()
         self.__focusOnWindow(id=dofWinID)
 
@@ -208,6 +251,9 @@ class logDof(Thread):
             del self.accNames[0]
 
 class saveLogs(Thread):
+    """
+        Thread s'occupant de la sauvegarde des comptes
+    """
     name = ""
     raw_username = ""
     raw_password = ""
@@ -231,6 +277,9 @@ class saveLogs(Thread):
         toaster_thread.isShowing = True
 
 class deleteLogs(Thread):
+    """
+        Thread s'occupant de la suppresion des comptes
+    """
     name=""
     def __init__(self):
         Thread.__init__(self)
@@ -251,6 +300,9 @@ class deleteLogs(Thread):
         toaster_thread.isShowing = True
 
 class toasterWin10(Thread):
+    """
+        Thread s'occupant des notifications Windows 10
+    """
     message = ""
     isShowing = False
     isRunning = True
@@ -271,6 +323,9 @@ class toasterWin10(Thread):
                 sleep(0.5)
 
 def setup_config():
+    """
+        Créer un fichier config si inexistant
+    """
     if exists('config.ini'):
         config.read("config.ini")
     else:
@@ -285,6 +340,9 @@ def setup_config():
 
 
 def upper_str(str):
+    """
+        Renvoie le nom de compte avec une majuscule au début
+    """
     string = list(str)
     if config["General"]["upper_accounts"] == "True":
         string[0] = string[0].upper()
