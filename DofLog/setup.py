@@ -35,7 +35,7 @@ setup(name='DofLog',
       description="DofLog",
       options={
         "build_exe": {
-            "packages": ["pkg_resources"],
+            "packages": ["pkg_resources", "asyncio"],
             "include_files": collect_dist_info("win10toast"),
         },
     },

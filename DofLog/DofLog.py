@@ -349,18 +349,17 @@ class DiscordRPC(Thread):
                 try:
                     if(self.timeBuffer==5):
                         nbDof = 0
-                        nameList = ""
+                        nameList = "Se connecte..."
                         namePerso = self.__countWindows()
                         sizePerso = len(namePerso)
                         if sizePerso >= 1:
+                            nameList = ""
                             for i in range(sizePerso):
                                 if not "Dofus" in namePerso[i][0]:
                                     nameList+=namePerso[i][0]
                                     nbDof+=1
                                     if not i == sizePerso-1:
                                         nameList+=", "
-                        elif sizePerso == 0:
-                            nameList = "Se connecte..."
                         self.timeBuffer=0
                     else:
                         self.timeBuffer+=1
@@ -376,9 +375,10 @@ class DiscordRPC(Thread):
                                     small_text="Dofus", \
                                     state=nameList, \
                                     start=self.startTime)
-                except InvalidID:
+                except:
                     # En cas de déconnexion
-                    self.run(self)
+                    self.run()
+                    self.DRPCisEnabled = False
                 sleep(1)
 
     def __countWindows(self):

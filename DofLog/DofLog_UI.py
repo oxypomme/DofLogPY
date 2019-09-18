@@ -23,6 +23,7 @@ class CheckList(QtWidgets.QListWidget):
 class DofLogWindow(QtWidgets.QMainWindow):
     def closeEvent(self, event):
         toaster_thread.isRunning = False
+        discord_thread.stop()
         event.accept()
 
 class Ui_MainWindow(object):
