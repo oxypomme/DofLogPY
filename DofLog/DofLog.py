@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from threading import Thread, Event
-from time import sleep
+from time import sleep, time
 from os import environ, remove, getcwd
 from os.path import exists, join
 from PIL import Image, ImageGrab
 from subprocess import Popen, DEVNULL
 from win10toast import ToastNotifier
+from pypresence import Presence, InvalidID, InvalidPipe
 
 from configparser import *
 from pyautogui import *
@@ -151,8 +152,6 @@ class logDof(Thread):
         typewrite(passwd)
 
     ### GESTION DES FENÊTRES ###
-    def __windowEnumerationHandler(self, hwnd, top_windows):
-        top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
     def __focusOnWindow(self, title=None, id=None):
         """
             Met au premier plan la fenêtre avec le nom/processid correspondant
@@ -160,7 +159,7 @@ class logDof(Thread):
         if title!=None:
             results = []
             top_windows = []
-            win32gui.EnumWindows(self.__windowEnumerationHandler, top_windows)
+            win32gui.EnumWindows(windowEnumerationHandler, top_windows)
             for i in top_windows:
                 if title in i[1]:
                     win32gui.ShowWindow(i[0],5)
@@ -327,6 +326,79 @@ class toasterWin10(Thread):
             else:
                 sleep(0.5)
 
+class DiscordRPC(Thread):
+    """
+        Thread dédié au Discord Rich Presence
+    """
+
+    RPC = ""
+    DRPCisEnabled = False
+    isStopped = False
+    startTime = int(time.time())
+    timeBuffer=5
+    
+    def run(self):
+        try:
+            self.RPC = Presence(623896785605361664)
+            self.RPC.connect()
+        except (InvalidPipe):
+            self.DRPCisEnabled = False
+        else:
+            self.DRPCisEnabled = True
+            while(not self.isStopped): 
+                try:
+                    if(self.timeBuffer==5):
+                        nbDof = 0
+                        nameList = ""
+                        namePerso = self.__countWindows()
+                        sizePerso = len(namePerso)
+                        if sizePerso >= 1:
+                            for i in range(sizePerso):
+                                if not "Dofus" in namePerso[i][0]:
+                                    nameList+=namePerso[i][0]
+                                    nbDof+=1
+                                    if not i == sizePerso-1:
+                                        nameList+=", "
+                        elif sizePerso == 0:
+                            nameList = "Se connecte..."
+                        self.timeBuffer=0
+                    else:
+                        self.timeBuffer+=1
+
+                    if nbDof>1 or nbDof == 0:
+                        message = "Joue avec {0} comptes :".format(nbDof)
+                    else:
+                        message = "Joue avec 1 compte :"
+
+                    self.RPC.update(details=message, \
+                                    large_image="header", \
+                                    small_image="dofuslogo", \
+                                    small_text="Dofus", \
+                                    state=nameList, \
+                                    start=self.startTime)
+                except InvalidID:
+                    # En cas de déconnexion
+                    self.run(self)
+                sleep(1)
+
+    def __countWindows(self):
+        namePerso = []
+        top_windows = []
+        win32gui.EnumWindows(windowEnumerationHandler, top_windows)
+        for i in top_windows:
+            if "Dofus" in i[1]:
+                namePerso.append(i[1].split(' - '))
+        return namePerso
+
+    def stop(self):
+        "Arrête le thread"
+        if(self.DRPCisEnabled):
+            self.RPC.close()
+        self.isStopped = True
+
+def windowEnumerationHandler(hwnd, top_windows):
+    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
+
 def setup_config():
     """
         Créer un fichier config si inexistant
@@ -357,3 +429,6 @@ setup_config()
 
 toaster_thread = toasterWin10()
 toaster_thread.start()
+
+discord_thread = DiscordRPC()
+discord_thread.start()
