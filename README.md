@@ -9,7 +9,7 @@
   - [Installation](#installation)
   - [Développé avec](#d%c3%a9velopp%c3%a9-avec)
   - [Versioning](#versioning)
-  - [Historique des Versions](#release-history)
+  - [Historique des Versions](#historique-des-versions)
   - [Auteur](#auteur)
   - [Licence](#licence)
   - [Contribute](#contribute)
@@ -57,6 +57,8 @@ Installez.
 Jouez !
 ```
 
+> **Note  :** Si le programme se bloque au niveau de la page de connexion de l'Ankama Launcher, vérifiez qu'il n'y a pas de mot de passe écrit.
+
 ## Développé avec
 
 - [cx_Freeze](https://anthony-tuininga.github.io/cx_Freeze/)
@@ -71,6 +73,8 @@ J'utilise [SemVer](http://semver.org/) pour le versioning. Pour la liste complè
 
 ## Historique des Versions
 
+- 0.1.2
+  - Mise à jour pour la version 2.10 de l'Ankama Launcher
 - 0.1.1
   - Changer l'ordre de la liste directement depuis le programme
   - Indication de la position de l'Ankama Launcher lors de la première connexion (si il est introuvable par le programme)

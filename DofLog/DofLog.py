@@ -17,7 +17,7 @@ PAUSE = 0.25 # Pause entre chaque action
 FAILSAFE = True # Si la souris est bougé vers le coin en haut à gauche de l'écran le programme s'arrête
 
 df_windowTitle = "DofLog"
-df_version = "0.1.1"
+df_version = "0.1.2"
 
 config = ConfigParser() # Fichier config
 
@@ -48,13 +48,14 @@ class logDof(Thread):
             toastMessage = "Pas de comptes enregistrés !"
         else:
             self.__startAL()
-            isLog = self.__isLogable(585,505) # Vérifie si le programme peut lancer Dofus
+            isLog = self.__isLogable(650,525) # Vérifie si le programme peut se connecter à AL
             if not (isLog == (134,182,68) or isLog == (133,181,68)):
                 self.__logAL(usernames[0],passwords[0])
             dofIDs.append(self.__startDof())
             while not self.__isLogable(1200,835) == (214,246,0):
                 # Vérifie si le compte est bien connecté
                 if self.__isLogable(955,585) == (214,246,0):
+                    # Vérifie si le programme peut lancer Dofus
                     self.__logDof(dofIDs[0],usernames[0],passwords[0])
                 else:
                     sleep(1)
@@ -105,6 +106,7 @@ class logDof(Thread):
             Retourne la couleur du pixel indiqué
         """
         color = ImageGrab.grab((startX, startY, startX+1, startY+1)).load()[0,0]
+        #print("{0}:{1} | {2}".format(startX, startY, color)) debug purpose
         return color
 
     ### ECRITURE DU MOT DE PASSE ###
@@ -181,7 +183,7 @@ class logDof(Thread):
         """
             Se connecte à L'Ankama Launcher avec le premier compte
         """
-        while not self.__isLogable(560,515)==(130,141,148):
+        while not self.__isLogable(650,525) == (24,44,58):
             sleep(1)
         moveTo(620, 340) # Position du champ "Nom de compte" de l'AL
         click()
@@ -194,12 +196,13 @@ class logDof(Thread):
         press('backspace')
         self.__typepassword(password)
 
-        while not self.__isLogable(560,515)==(254,252,250):
+        while not self.__isLogable(650,525)==(255,168,44):
             # Tant que le programme ne peut se connecter
             sleep(1)
-        moveTo(560, 515) # Se connecte
+        moveTo(650,525) # Se connecte
         click()
 
+    ### DEMARRAGE DE DOFUS ###
     def __startDof(self):
         """
             Lance Dofus et retourne son processid
@@ -208,12 +211,11 @@ class logDof(Thread):
         moveTo(395, 270) # Clique sur l'onglet Dofus
         click()
         while True:
-            isLog = self.__isLogable(585,505)
             # Vérifie si le programme peut lancer Dofus
-            if isLog == (134,182,68) or isLog == (133,181,68):
+            if self.__isLogable(1380,742) == (255,255,255):
                 break
             sleep(1)
-        moveTo(585, 505) # Lance Dofus
+        moveTo(1380,742) # Lance Dofus
         click()
         while not win32gui.GetWindowText(win32gui.GetForegroundWindow()) == "Dofus":
             sleep(1)
@@ -239,10 +241,13 @@ class logDof(Thread):
 
         press('enter') # Se connecte
     def __unlogAL(self, dofWinID):
+        """
+            Se déconnecte de AL
+        """
         self.__focusOnWindow(title="Ankama Launcher")
         moveTo(1535, 205) # Postition de la gestion de compte sur AL
         click()
-        moveTo(1535, 325) # Postition du bouton deconnexion sur AL
+        moveTo(1380, 625) # Postition du bouton deconnexion sur AL
         click()
         self.__focusOnWindow(id=dofWinID)
 
