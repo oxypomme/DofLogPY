@@ -133,7 +133,8 @@ class Ui_MainWindow(object):
         self.error_msg.setWindowIcon(self.icon)
 
         self.setImages()
-        MainWindow.setStyleSheet("QPushButton{background-color:transparent;}")
+        MainWindow.setStyleSheet("""QPushButton{background-color:transparent;}
+                                    #MainWindow{background-image:url('res/bg.png')}""")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
