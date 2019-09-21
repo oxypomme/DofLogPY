@@ -19,10 +19,10 @@
 
 Marre d'avoir des crash toutes les 5 minutes de jeu ? Vous avez un ordinateur tournant en 64 Bits ? Alors la version de Dofus en 64 Bits peut vous intéresser !
 
-Malheureusement, connecter plusieurs compte est long et fastidieux...\
+Malheureusement, connecter plusieurs comptes est long et fastidieux...\
 Mais pour cela il existe des outils, notamment le [nAiO](https://naio.fr/), de ZDS, qui connecte à notre place tout nos comptes. Mais il ne marche qu'en 32Bits.
 
-C'est pourquoi j'ai développé `DofLog`, un outil pour se connecter automatiquement à Dofus en passant par l'Anakama Launcher !
+C'est pourquoi j'ai développé `DofLog`, un outil pour se connecter automatiquement à Dofus en passant par l'Ankama Launcher !
 
 ![Header](header.png)\
 <font size="2">*DofLog dans sa version 0.1.3*</font>
@@ -35,11 +35,11 @@ Connectez vous avec un compte (n'importe lequel, on va régler 2~3 trucs).
 Installez Dofus.
 Pendant ce temps, cliquez sur la petite roue dentée (Paramètres) et
     Vérifiez que le Launcher ne se réduit pas dans la zone de notification après le lancement d'un jeu.
-    A la réduction d'Ankama Launcher, il se réduise dans la barre des tâches.
+    Vérifiez qu'a la réduction d'Ankama Launcher, il se réduise dans la barre des tâches.
 Déconnectez vous.
 ```
 
-> **Note :** Evitez de bouger la fenêtre de l'[Anakama Launcher](https://www.ankama.com/fr/launcher)
+> **Note :** Evitez de bouger la fenêtre de l'[Ankama Launcher](https://www.ankama.com/fr/launcher)
 
 Téléchargez la dernière version dans l'onglet [releases](https://github.com/oxypomme/DofLog/releases).
 
