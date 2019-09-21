@@ -355,3 +355,4 @@ DofLog/Modules/
 
 #Config file
 DofLog/config.ini
+*.psd

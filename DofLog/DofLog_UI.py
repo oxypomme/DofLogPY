@@ -29,11 +29,10 @@ class DofLogWindow(QtWidgets.QMainWindow):
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.icon = QtGui.QIcon("icon.ico")
+        MainWindow.setMaximumSize(QtCore.QSize(315, 185))
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(363, 182)
-        MainWindow.setMinimumSize(QtCore.QSize(363, 182))
-        MainWindow.setMaximumSize(QtCore.QSize(363, 182))
         MainWindow.setWindowIcon(self.icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -52,12 +51,11 @@ class Ui_MainWindow(object):
         self.passwordLbl.setObjectName("passwordLbl")
         self.gridLayout.addWidget(self.passwordLbl, 2, 0, 1, 1)
         self.connectBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.connectBtn.setMinimumSize(QtCore.QSize(0, 75))
         self.connectBtn.setObjectName("connectBtn")
-        self.gridLayout.addWidget(self.connectBtn, 4, 2, 1, 1)
+        self.gridLayout.addWidget(self.connectBtn, 4, 2, 1, 1, QtCore.Qt.AlignTop)
         self.organiserBtn = QtWidgets.QPushButton(self.centralwidget)
         self.organiserBtn.setObjectName("organiserBtn")
-        self.gridLayout.addWidget(self.organiserBtn, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.organiserBtn, 2, 2, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignLeft)
         self.gridLayout_3 = QtWidgets.QGridLayout()
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.upBtn = QtWidgets.QPushButton(self.centralwidget)
@@ -75,7 +73,7 @@ class Ui_MainWindow(object):
         self.addBtn = QtWidgets.QPushButton(self.centralwidget)
         self.addBtn.setMaximumSize(QtCore.QSize(75, 16777215))
         self.addBtn.setObjectName("addBtn")
-        self.gridLayout.addWidget(self.addBtn, 0, 2, 1, 1, QtCore.Qt.AlignHCenter)
+        self.gridLayout.addWidget(self.addBtn, 0, 2, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignLeft)
         self.passwordLE = QtWidgets.QLineEdit(self.centralwidget)
         self.passwordLE.setMinimumSize(QtCore.QSize(153, 0))
         self.passwordLE.setMaximumSize(QtCore.QSize(153, 16777215))
@@ -107,7 +105,7 @@ class Ui_MainWindow(object):
         self.deleteBtn.setMaximumSize(QtCore.QSize(75, 16777215))
         self.deleteBtn.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.deleteBtn.setObjectName("deleteBtn")
-        self.gridLayout.addWidget(self.deleteBtn, 1, 2, 1, 1, QtCore.Qt.AlignHCenter)
+        self.gridLayout.addWidget(self.deleteBtn, 1, 2, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignLeft)
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -134,24 +132,44 @@ class Ui_MainWindow(object):
         self.error_msg.setWindowTitle(df_windowTitle)
         self.error_msg.setWindowIcon(self.icon)
 
+        self.setImages()
+        MainWindow.setStyleSheet("QPushButton{background-color:transparent;}")
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", df_windowTitle + " - v" + df_version))
-        self.passwordLbl.setText(_translate("MainWindow", "Mot de Passe :"))
-        self.organiserBtn.setText(_translate("MainWindow", "Organiser (nAiO)"))
-        self.addBtn.setText(_translate("MainWindow", "Ajouter"))
+        self.passwordLbl.setText(_translate("MainWindow", "Mot de passe :"))
+        #self.organiserBtn.setText(_translate("MainWindow", "Organiser (nAiO)"))
+        self.organiserBtn.setToolTip(_translate("MainWindow", "Lance l'Organiser (nAiO)"))
+        #self.addBtn.setText(_translate("MainWindow", "Ajouter"))
+        self.addBtn.setToolTip(_translate("MainWindow", "Ajoute le compte dans le fichier sauvegarde"))
         self.usernameLbl.setText(_translate("MainWindow", "Nom de compte :"))
         self.nameLbl.setText(_translate("MainWindow", "Nom du raccourci :"))
         self.connectBtn.setToolTip(_translate("MainWindow", "Connecte le/les compte(s) sélectionné(s)"))
-        self.connectBtn.setText(_translate("MainWindow", "Connecter !"))
+        #self.connectBtn.setText(_translate("MainWindow", "Connecter !"))
         self.deleteBtn.setToolTip(_translate("MainWindow", "Supprime le compte sélectionné"))
-        self.deleteBtn.setText(_translate("MainWindow", "Supprimer"))
+        #self.deleteBtn.setText(_translate("MainWindow", "Supprimer"))
         self.stayLogCB.setToolTip(_translate("MainWindow", "Reste connecté à Ankama Launcher après la connexion à Dofus"))
         self.stayLogCB.setText(_translate("MainWindow", "Rester co"))
-        self.upBtn.setText(_translate("MainWindow", "▲"))
+        #self.upBtn.setText(_translate("MainWindow", "▲"))
         self.upBtn.setToolTip(_translate("MainWindow", "Monte le compte sélectionné dans la liste"))
-        self.downBtn.setText(_translate("MainWindow", "▼"))
+        #self.downBtn.setText(_translate("MainWindow", "▼"))
         self.downBtn.setToolTip(_translate("MainWindow", "Descend le compte sélectionné dans la liste"))
+
+    def setImages(self):
+        self.organiserBtn.setIcon(QtGui.QIcon('res/organiser.ico'))
+        self.organiserBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.addBtn.setIcon(QtGui.QIcon('res/add.png'))
+        self.addBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.deleteBtn.setIcon(QtGui.QIcon('res/rem.png'))
+        self.deleteBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.connectBtn.setIcon(QtGui.QIcon('res/login.png'))
+        self.connectBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.connectBtn.setIconSize(Qt.QSize(32,32))
+        self.upBtn.setIcon(QtGui.QIcon('res/up.png'))
+        self.upBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.downBtn.setIcon(QtGui.QIcon('res/down.png'))
+        self.downBtn.setCursor(QtCore.Qt.PointingHandCursor)
 
     def addAction(self):
         savelogsThread = saveLogs()
@@ -243,7 +261,6 @@ class Ui_MainWindow(object):
                     break
             if id > 0:
                 accounts[id], accounts[id-1] = accounts[id-1], accounts[id]
-                print(accounts)
                 config.remove_section('Accounts')
                 config.add_section("Accounts")
                 for i in range(len(accounts)):
@@ -258,7 +275,6 @@ class Ui_MainWindow(object):
         try:
             name = self.listWidget.currentItem().text().lower()
             accounts = list(config.items('Accounts'))
-            print(accounts)
             for i in range(len(accounts)):
                 if accounts[i][0] == name:
                     id = i
