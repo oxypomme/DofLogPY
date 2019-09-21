@@ -1,6 +1,7 @@
 # DofLog
 
 > DofLog est un outil de connexion automatique pour Dofus 64bits développé en Python.
+> Cette version n'est plus mise à jour ! [Nouvelle version](https://github.com/oxypomme/DofLogC)
 
 <img src="DofLog/icon.ico" alt="drawing" width="100"/>
 
