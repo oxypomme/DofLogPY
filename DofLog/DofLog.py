@@ -2,7 +2,7 @@
 
 from threading import Thread, Event
 from time import sleep, time
-from os import environ, remove, getcwd
+from os import environ, remove, getcwd, rename, mkdir
 from os.path import exists, join
 from PIL import Image, ImageGrab
 from subprocess import Popen, DEVNULL
@@ -414,6 +414,50 @@ def setup_config():
         config.add_section("Accounts")
         with open('config.ini', 'w') as configfile:
             config.write(configfile)
+
+    #Bouge les fichiers au bon endroit
+    if not exists("res"):
+        mkdir("res")
+
+    if not exists("res/add.png"):
+        rename("add.png", "res/add.png")
+    elif exists("add.png"):
+        remove("add.png")
+
+    if not exists("res/bg.png"):
+        rename("bg.png", "res/bg.png")
+    elif exists("bg.png"):
+        remove("bg.png")
+
+    if not exists("res/down.png"):
+        rename("down.png", "res/down.png")
+    elif exists("down.png"):
+        remove("down.png")
+
+    if not exists("res/login.png"):
+        rename("login.png", "res/login.png")
+    elif exists("login.png"):
+        remove("login.png")
+
+    if not exists("res/rem.png"):
+        rename("rem.png", "res/rem.png")
+    elif exists("rem.png"):
+        remove("rem.png")
+
+    if not exists("res/up.png"):
+        rename("up.png", "res/up.png")
+    elif exists("up.png"):
+        remove("up.png")
+
+    if not exists("res/icon.ico"):
+        rename("icon.ico", "res/icon.ico")
+    elif exists("icon.ico"):
+        remove("icon.ico")
+
+    if not exists("res/organiser.ico"):
+        rename("organiser.ico", "res/organiser.ico")
+    elif exists("organiser.ico"):
+        remove("organiser.ico")
 
 
 def upper_str(str):

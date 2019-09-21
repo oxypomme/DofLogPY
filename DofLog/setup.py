@@ -16,7 +16,7 @@ def collect_dist_info(packages):
     """
     if not isinstance(packages, list):
         packages = [packages]
-    dirs = ["icon.ico"]
+    dirs = ["res/icon.ico","res/organiser.ico","res/add.png","res/rem.png","res/login.png","res/up.png","res/down.png","res/bg.png"]
     for pkg in packages:
         distrib = pkg_resources.get_distribution(pkg)
         for req in distrib.requires():
@@ -27,7 +27,7 @@ def collect_dist_info(packages):
 executable = [Executable(script="DofLog_UI.py",
                          base = "Win32GUI", 
                          targetName="DofLog.exe", 
-                         icon="icon.ico")
+                         icon="res/icon.ico")
                ]
 
 setup(name='DofLog',

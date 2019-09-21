@@ -28,7 +28,7 @@ class DofLogWindow(QtWidgets.QMainWindow):
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        self.icon = QtGui.QIcon("icon.ico")
+        self.icon = QtGui.QIcon("res/icon.ico")
         MainWindow.setMaximumSize(QtCore.QSize(315, 185))
 
         MainWindow.setObjectName("MainWindow")

@@ -36,9 +36,7 @@
   <ItemGroup>
     <Content Include="config.ini" />
     <Content Include="DofLog_UI.ui" />
-    <Content Include="icon.ico" />
     <Content Include="res\icon.ico" />
-    <Content Include="res\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="res\" />
