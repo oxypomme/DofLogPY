@@ -20,6 +20,8 @@ FAILSAFE = True # Si la souris est bougé vers le coin en haut à gauche de l'é
 df_windowTitle = "DofLog"
 df_version = "0.1.3"
 
+retro_mode = False
+
 config = ConfigParser() # Fichier config
 
 class AccountNotFoundError(Exception):
@@ -207,7 +209,10 @@ class logDof(Thread):
             Lance Dofus et retourne son processid
         """
         self.__focusOnWindow(title="Ankama Launcher")
-        moveTo(395, 270) # Clique sur l'onglet Dofus
+        if not retro_mode:
+            moveTo(395, 270) # Clique sur l'onglet Dofus
+        else:
+            moveTo(395,330) # Clique sur l'onglet Dofus Retro
         click()
         while True:
             # Vérifie si le programme peut lancer Dofus
@@ -224,10 +229,16 @@ class logDof(Thread):
             Se connecte à Dofus (nécessite l'entrée d'un processid)
         """
         self.__focusOnWindow(id=windowID)
-        while not self.__isLogable(955,585)==(214,246,0):
-            # Tant que le programme ne peut se connecter à Dofus
-            sleep(1)
-        moveTo(945, 350) # Position du champ "Nom de compte" de Dofus
+        if not retro_mode:
+            while not self.__isLogable(955,585)==(214,246,0):
+                # Tant que le programme ne peut se connecter à Dofus
+                sleep(1)
+            moveTo(945, 350) # Position du champ "Nom de compte" de Dofus
+        else:
+             while not self.__isLogable(955,585)==(214,246,0):
+                # Tant que le programme ne peut se connecter à Dofus
+                sleep(1)
+             moveTo(790,465) # Position du champ "Nom de compte" de Dofus Retro
         click()
         hotkey('ctrl', 'a')
         press('backspace')
@@ -405,6 +416,9 @@ def setup_config():
     """
     if exists('config.ini'):
         config.read("config.ini")
+
+        if config["General"]["retro_mode"] == "True":
+            retro_mode = True
     else:
         config.add_section("General")
         config.set("General","al_path","C:\\Users\\"+environ['USERNAME']+"\\AppData\\Local\\Programs\\zaap\\Ankama Launcher.exe")
@@ -419,22 +433,45 @@ def setup_config():
     #Bouge les fichiers au bon endroit
     if not exists("res"):
         mkdir("res")
-
-    if not exists("res/bg_2.jpg"):
-        rename("bg_2.jpg", "res/bg_2.jpg")
-    elif exists("bg_2.jpg"):
-        remove("bg_2.jpg")
         
-    if not exists("res/checkbox_c.jpg"):
-        rename("checkbox_c.jpg", "res/checkbox_c.jpg")
-    elif exists("checkbox_c.jpg"):
-        remove("checkbox_c.jpg")
-        
-    if not exists("res/checkbox_uc.jpg"):
-        rename("checkbox_uc.jpg", "res/checkbox_uc.jpg")
-    elif exists("checkbox_uc.jpg"):
-        remove("checkbox_uc.jpg")
+    if not exists("res/d2"):
+        mkdir("res/d2")
+    if not exists("res/dr"):
+        mkdir("res/dr")
 
+    ## DOFUS 2 ##
+    if not exists("res/d2/bg.jpg"):
+        rename("bg2.jpg", "res/d2/bg.jpg")
+    elif exists("bg2.jpg"):
+        remove("bg2.jpg")
+        
+    if not exists("res/d2/checkbox_c.jpg"):
+        rename("checkbox_c2.jpg", "res/d2/checkbox_c.jpg")
+    elif exists("checkbox_c2.jpg"):
+        remove("checkbox_c2.jpg")
+        
+    if not exists("res/d2/checkbox_uc.jpg"):
+        rename("checkbox_uc2.jpg", "res/d2/checkbox_uc.jpg")
+    elif exists("checkbox_uc2.jpg"):
+        remove("checkbox_uc2.jpg")
+
+    ## DOFUS RETRO ##
+    if not exists("res/dr/bg.jpg"):
+        rename("bgr.jpg", "res/dr/bg.jpg")
+    elif exists("bgr.jpg"):
+        remove("bgr.jpg")
+        
+    if not exists("res/dr/checkbox_c.jpg"):
+        rename("checkbox_cr.jpg", "res/dr/checkbox_c.jpg")
+    elif exists("checkbox_cr.jpg"):
+        remove("checkbox_cr.jpg")
+        
+    if not exists("res/dr/checkbox_uc.jpg"):
+        rename("checkbox_ucr.jpg", "res/dr/checkbox_uc.jpg")
+    elif exists("checkbox_ucr.jpg"):
+        remove("checkbox_ucr.jpg")
+
+    ## COMMON ##
     if not exists("res/add.png"):
         rename("add.png", "res/add.png")
     elif exists("add.png"):

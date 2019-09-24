@@ -134,9 +134,9 @@ class Ui_MainWindow(object):
 
         self.setImages()
 
-        retro_mode = False
-        if config["General"]["stay_logged"] == "True":
-            retro_mode = True
+        folder="d2"
+        if retro_mode:
+            folder="dr"
 
         MainWindow.setStyleSheet("""
                 QPushButton{
@@ -144,17 +144,17 @@ class Ui_MainWindow(object):
                     }
 
                 QCheckBox::indicator:unchecked{
-                        image: url('res/checkbox_uc.jpg')
+                        image: url('res/d2/checkbox_uc.jpg')
                     }
                 QCheckBox::indicator:checked{
-                        image: url('res/checkbox_c.jpg')
+                        image: url('res/d2/checkbox_c.jpg')
                     }
                 
                 QListWidget::indicator:unchecked{
-                        image: url('res/checkbox_uc.jpg')
+                        image: url('res/d2/checkbox_uc.jpg')
                     }
                 QListWidget::indicator:checked{
-                        image: url('res/checkbox_c.jpg');
+                        image: url('res/d2/checkbox_c.jpg');
                     }
 
                 QListWidget{
@@ -174,9 +174,9 @@ class Ui_MainWindow(object):
                     }
 
                 #MainWindow{
-                        background-image:url('res/bg_2.jpg');
+                        background-image:url('res/d2/bg.jpg');
                     }
-                """)
+                """.format(folder))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
