@@ -11,18 +11,13 @@ environ['TCL_LIBRARY'] = r'C:\Program Files (x86)\Microsoft Visual Studio\Shared
 environ['TK_LIBRARY'] = r'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\tcl\tk8.6'
 
 def collect_res():
+    """
+     Recursively collects the path of the ressources
+    """
     files = []
-    dirs = []
-    for file in listdir('./res'):
+    for file in listdir('./res_build/'):
         if "." in file :
-            files.append("res/"+file)
-        else:
-            dirs.append(file)
-
-    for dir in dirs:
-        for file in listdir('./res/'+dir):
-            files.append("res/"+dir+"/"+file)
-
+            files.append("res_build/"+file)
     return(files)
 
 def collect_dist_info(packages):
