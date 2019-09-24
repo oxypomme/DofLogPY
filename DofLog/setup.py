@@ -4,11 +4,18 @@ import sys
 import pkg_resources
 from os.path import join, basename
 
-from os import environ
+from os import environ, listdir
 from cx_Freeze import setup, Executable
 
 environ['TCL_LIBRARY'] = r'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\tcl\tcl8.6'
 environ['TK_LIBRARY'] = r'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\tcl\tk8.6'
+
+def collect_res():
+    dirs=[]
+    for file in listdir('./res'):
+        if file :
+            dirs.append(file)
+    return dirs
 
 def collect_dist_info(packages):
     """
@@ -16,7 +23,7 @@ def collect_dist_info(packages):
     """
     if not isinstance(packages, list):
         packages = [packages]
-    dirs = ["res/icon.ico","res/organiser.ico","res/add.png","res/rem.png","res/login.png","res/up.png","res/down.png","res/bg_2.jpg","res/checkbox_uc.jpg","res/checkbox_c.jpg"]
+    dirs = collect_res()
     for pkg in packages:
         distrib = pkg_resources.get_distribution(pkg)
         for req in distrib.requires():

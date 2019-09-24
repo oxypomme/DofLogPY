@@ -134,11 +134,44 @@ class Ui_MainWindow(object):
 
         self.setImages()
 
-        folder="d2"
-        if retro_mode:
-            folder="dr"
+        if config["General"]["retro_mode"] == "True":
+            MainWindow.setStyleSheet("""
+                QPushButton{
+                        background-color:transparent;
+                    }
 
-        MainWindow.setStyleSheet("""
+                QCheckBox::indicator:unchecked{
+                        image: url('res/dr/checkbox_uc.jpg')
+                    }
+                QCheckBox::indicator:checked{
+                        image: url('res/dr/checkbox_c.jpg')
+                    }
+                
+                QListWidget::indicator:unchecked{
+                        image: url('res/dr/checkbox_uc.jpg')
+                    }
+                QListWidget::indicator:checked{
+                        image: url('res/dr/checkbox_c.jpg');
+                    }
+
+                QListWidget{
+                        background-color: transparent;
+                        border-style: outset;
+                        border-color: transparent;
+                    }
+
+                QLineEdit{
+                        background-color:transparent;
+                        border-style: outset;
+                        border-color:transparent;
+                    }
+
+                #MainWindow{
+                        background-image:url('res/dr/bg.jpg');
+                    }
+                """)
+        else:
+            MainWindow.setStyleSheet("""
                 QPushButton{
                         background-color:transparent;
                     }
@@ -176,7 +209,7 @@ class Ui_MainWindow(object):
                 #MainWindow{
                         background-image:url('res/d2/bg.jpg');
                     }
-                """.format(folder))
+                """)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
