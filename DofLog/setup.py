@@ -16,7 +16,7 @@ def collect_dist_info(packages):
     """
     if not isinstance(packages, list):
         packages = [packages]
-    dirs = ["res/icon.ico","res/organiser.ico","res/add.png","res/rem.png","res/login.png","res/up.png","res/down.png","res/bg.png"]
+    dirs = ["res/icon.ico","res/organiser.ico","res/add.png","res/rem.png","res/login.png","res/up.png","res/down.png","res/bg_2.jpg","res/checkbox_uc.jpg","res/checkbox_c.jpg"]
     for pkg in packages:
         distrib = pkg_resources.get_distribution(pkg)
         for req in distrib.requires():

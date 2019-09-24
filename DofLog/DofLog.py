@@ -410,6 +410,7 @@ def setup_config():
         config.set("General","al_path","C:\\Users\\"+environ['USERNAME']+"\\AppData\\Local\\Programs\\zaap\\Ankama Launcher.exe")
         config.set("General","stay_logged",str(False))
         config.set("General","upper_accounts",str(True))
+        config.set("General","retro_mode",str(False))
 
         config.add_section("Accounts")
         with open('config.ini', 'w') as configfile:
@@ -419,15 +420,25 @@ def setup_config():
     if not exists("res"):
         mkdir("res")
 
+    if not exists("res/bg_2.jpg"):
+        rename("bg_2.jpg", "res/bg_2.jpg")
+    elif exists("bg_2.jpg"):
+        remove("bg_2.jpg")
+        
+    if not exists("res/checkbox_c.jpg"):
+        rename("checkbox_c.jpg", "res/checkbox_c.jpg")
+    elif exists("checkbox_c.jpg"):
+        remove("checkbox_c.jpg")
+        
+    if not exists("res/checkbox_uc.jpg"):
+        rename("checkbox_uc.jpg", "res/checkbox_uc.jpg")
+    elif exists("checkbox_uc.jpg"):
+        remove("checkbox_uc.jpg")
+
     if not exists("res/add.png"):
         rename("add.png", "res/add.png")
     elif exists("add.png"):
         remove("add.png")
-
-    if not exists("res/bg.png"):
-        rename("bg.png", "res/bg.png")
-    elif exists("bg.png"):
-        remove("bg.png")
 
     if not exists("res/down.png"):
         rename("down.png", "res/down.png")

@@ -133,8 +133,50 @@ class Ui_MainWindow(object):
         self.error_msg.setWindowIcon(self.icon)
 
         self.setImages()
-        MainWindow.setStyleSheet("""QPushButton{background-color:transparent;}
-                                    #MainWindow{background-image:url('res/bg.png')}""")
+
+        retro_mode = False
+        if config["General"]["stay_logged"] == "True":
+            retro_mode = True
+
+        MainWindow.setStyleSheet("""
+                QPushButton{
+                        background-color:transparent;
+                    }
+
+                QCheckBox::indicator:unchecked{
+                        image: url('res/checkbox_uc.jpg')
+                    }
+                QCheckBox::indicator:checked{
+                        image: url('res/checkbox_c.jpg')
+                    }
+                
+                QListWidget::indicator:unchecked{
+                        image: url('res/checkbox_uc.jpg')
+                    }
+                QListWidget::indicator:checked{
+                        image: url('res/checkbox_c.jpg');
+                    }
+
+                QListWidget{
+                        background-color: transparent;
+                        border-style: outset;
+                        border-color: transparent;
+                    }
+
+                QLineEdit{
+                        background-color:transparent;
+                        border-style: outset;
+                        border-color:transparent;
+                    }
+
+                QLabel,QCheckBox,QLineEdit,QListWidget::item{
+                        color:white;
+                    }
+
+                #MainWindow{
+                        background-image:url('res/bg_2.jpg');
+                    }
+                """)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -171,6 +213,7 @@ class Ui_MainWindow(object):
         self.upBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.downBtn.setIcon(QtGui.QIcon('res/down.png'))
         self.downBtn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.stayLogCB.setCursor(QtCore.Qt.PointingHandCursor)
 
     def addAction(self):
         savelogsThread = saveLogs()
