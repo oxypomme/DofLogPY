@@ -78,6 +78,8 @@ J'utilise [SemVer](http://semver.org/) pour le versioning. Pour la liste complè
 - 0.1.3
   - Integration Discord Presence
   - Mise à jour graphique
+  - Intégration Dofus Retro
+  - Onglet paramètres
 - 0.1.2
   - Mise à jour pour la version 2.10 de l'Ankama Launcher
 - 0.1.1
