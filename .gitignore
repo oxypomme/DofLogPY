@@ -355,5 +355,4 @@ DofLog/Modules/
 
 #Config file
 DofLog/config.ini
-*.psd
-/DofLog/res_build
+/DofLog/res
