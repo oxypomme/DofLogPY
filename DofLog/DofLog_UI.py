@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from DofLog import *
 
 from wget import download
@@ -47,7 +46,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.nameLE, 0, 1, 1, 1)
         self.passwordLbl = QtWidgets.QLabel(self.centralwidget)
         self.passwordLbl.setMaximumSize(QtCore.QSize(97, 16777215))
-        self.passwordLbl.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.passwordLbl.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.passwordLbl.setObjectName("passwordLbl")
         self.gridLayout.addWidget(self.passwordLbl, 2, 0, 1, 1)
         self.connectBtn = QtWidgets.QPushButton(self.centralwidget)
@@ -55,7 +54,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.connectBtn, 4, 2, 1, 1, QtCore.Qt.AlignTop)
         self.organiserBtn = QtWidgets.QPushButton(self.centralwidget)
         self.organiserBtn.setObjectName("organiserBtn")
-        self.gridLayout.addWidget(self.organiserBtn, 2, 2, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignLeft)
+        self.gridLayout.addWidget(self.organiserBtn, 2, 2, 1, 1, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignLeft)
         self.gridLayout_3 = QtWidgets.QGridLayout()
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.upBtn = QtWidgets.QPushButton(self.centralwidget)
@@ -73,7 +72,7 @@ class Ui_MainWindow(object):
         self.addBtn = QtWidgets.QPushButton(self.centralwidget)
         self.addBtn.setMaximumSize(QtCore.QSize(75, 16777215))
         self.addBtn.setObjectName("addBtn")
-        self.gridLayout.addWidget(self.addBtn, 0, 2, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignLeft)
+        self.gridLayout.addWidget(self.addBtn, 0, 2, 1, 1, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignLeft)
         self.passwordLE = QtWidgets.QLineEdit(self.centralwidget)
         self.passwordLE.setMinimumSize(QtCore.QSize(153, 0))
         self.passwordLE.setMaximumSize(QtCore.QSize(153, 16777215))
@@ -88,12 +87,12 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.listWidget, 4, 1, 1, 1)
         self.usernameLbl = QtWidgets.QLabel(self.centralwidget)
         self.usernameLbl.setMaximumSize(QtCore.QSize(97, 16777215))
-        self.usernameLbl.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.usernameLbl.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.usernameLbl.setObjectName("usernameLbl")
         self.gridLayout.addWidget(self.usernameLbl, 1, 0, 1, 1)
         self.nameLbl = QtWidgets.QLabel(self.centralwidget)
         self.nameLbl.setMaximumSize(QtCore.QSize(97, 16777215))
-        self.nameLbl.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.nameLbl.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.nameLbl.setObjectName("nameLbl")
         self.gridLayout.addWidget(self.nameLbl, 0, 0, 1, 1)
         self.usernameLE = QtWidgets.QLineEdit(self.centralwidget)
@@ -105,7 +104,7 @@ class Ui_MainWindow(object):
         self.deleteBtn.setMaximumSize(QtCore.QSize(75, 16777215))
         self.deleteBtn.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.deleteBtn.setObjectName("deleteBtn")
-        self.gridLayout.addWidget(self.deleteBtn, 1, 2, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignLeft)
+        self.gridLayout.addWidget(self.deleteBtn, 1, 2, 1, 1, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignLeft)
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -215,7 +214,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", df_windowTitle + " - v" + df_version))
         self.passwordLbl.setText(_translate("MainWindow", "Mot de passe :"))
-        #self.organiserBtn.setText(_translate("MainWindow", "Organiser (nAiO)"))
+        #self.organiserBtn.setText(_translate("MainWindow", "Organiser
+        #(nAiO)"))
         self.organiserBtn.setToolTip(_translate("MainWindow", "Lance l'Organiser (nAiO)"))
         #self.addBtn.setText(_translate("MainWindow", "Ajouter"))
         self.addBtn.setToolTip(_translate("MainWindow", "Ajoute le compte dans le fichier sauvegarde"))
@@ -248,6 +248,10 @@ class Ui_MainWindow(object):
         self.downBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.stayLogCB.setCursor(QtCore.Qt.PointingHandCursor)
 
+    def settings(self):
+        settings_window = SettingsWindow()
+        settings_widow.show()
+
     def addAction(self):
         savelogsThread = saveLogs()
 
@@ -257,7 +261,7 @@ class Ui_MainWindow(object):
 
         if nameLE_txt == "" or (' ' in nameLE_txt) or \
            usernameLE_txt == "" or (' ' in usernameLE_txt) or \
-           passwordLE_txt == ""or (' ' in passwordLE_txt):
+           passwordLE_txt == "" or (' ' in passwordLE_txt):
             self.error_msg.setText("L'un des champs requis est vide ou contient un espace !")
             self.error_msg.exec_()
         else:
@@ -337,7 +341,7 @@ class Ui_MainWindow(object):
                     id = i
                     break
             if id > 0:
-                accounts[id], accounts[id-1] = accounts[id-1], accounts[id]
+                accounts[id], accounts[id - 1] = accounts[id - 1], accounts[id]
                 config.remove_section('Accounts')
                 config.add_section("Accounts")
                 for i in range(len(accounts)):
@@ -356,8 +360,8 @@ class Ui_MainWindow(object):
                 if accounts[i][0] == name:
                     id = i
                     break
-            if id < len(accounts)-1:
-                accounts[id], accounts[id+1] = accounts[id+1], accounts[id]
+            if id < len(accounts) - 1:
+                accounts[id], accounts[id + 1] = accounts[id + 1], accounts[id]
                 config.remove_section('Accounts')
                 config.add_section("Accounts")
                 for i in range(len(accounts)):
@@ -369,7 +373,56 @@ class Ui_MainWindow(object):
             self.error_msg.setText("Aucun compte sélectionné !")
             self.error_msg.exec_()
         
-    
+class SettingsWindow(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(LoadWindow,self).__init__(parent=parent)
+
+        self.width = 255
+        self.height = 70
+        self.left = screenSize.width() / 2 - self.width / 2
+        self.top = screenSize.height() / 2 - self.height / 2
+
+        self.setup()
+
+    def setup(self):
+        "Initialise la fenêtre"
+        self.setWindowTitle(windowTitle + " - v1.0")
+        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.setFixedSize(self.size())
+        
+        self.createGrid()
+        self.constructGrid()
+        self.setupEvents()
+
+        self.setLayout(self.grid)
+
+        self.show()
+
+    def createGrid(self):
+        "Créer la grille"
+        self.saveNameLbl = QtWidgets.QLabel("Nom de la sauvegarde :")
+        self.saveNameTB = QtWidgets.QLineEdit(self)
+
+        self.loadBtn = QtWidgets.QPushButton("Charger une partie !", self)
+        self.newBtn = QtWidgets.QPushButton("Créer une partie !", self)
+        self.newBtn.setDefault(True)
+
+
+
+        self.grid = QtWidgets.QGridLayout()
+
+    def constructGrid(self):
+        "Affiche les widgets"
+        self.grid.addWidget(self.saveNameLbl,0,0)
+        self.grid.addWidget(self.saveNameTB,0,1)
+        self.grid.addWidget(self.loadBtn,1,0)
+        self.grid.addWidget(self.newBtn,1,1)
+
+    def setupEvents(self):
+        "Créer les événements des boutons"
+        self.loadBtn.clicked.connect(self.charger)
+        self.newBtn.clicked.connect(self.creer)
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(argv)
     MainWindow = DofLogWindow()
