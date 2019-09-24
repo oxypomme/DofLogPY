@@ -61,9 +61,6 @@ class Ui_MainWindow(object):
         self.upBtn.setMaximumSize(QtCore.QSize(30, 16777215))
         self.upBtn.setObjectName("upBtn")
         self.gridLayout_3.addWidget(self.upBtn, 2, 0, 1, 1, QtCore.Qt.AlignRight)
-        self.stayLogCB = QtWidgets.QCheckBox(self.centralwidget)
-        self.stayLogCB.setObjectName("stayLogCB")
-        self.gridLayout_3.addWidget(self.stayLogCB, 0, 0, 1, 1, QtCore.Qt.AlignRight)
         self.downBtn = QtWidgets.QPushButton(self.centralwidget)
         self.downBtn.setMaximumSize(QtCore.QSize(30, 16777215))
         self.downBtn.setObjectName("downBtn")
@@ -73,6 +70,10 @@ class Ui_MainWindow(object):
         self.addBtn.setMaximumSize(QtCore.QSize(75, 16777215))
         self.addBtn.setObjectName("addBtn")
         self.gridLayout.addWidget(self.addBtn, 0, 2, 1, 1, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignLeft)
+        self.settingsBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.settingsBtn.setMaximumSize(QtCore.QSize(75, 16777215))
+        self.settingsBtn.setObjectName("settingsBtn")
+        self.gridLayout_3.addWidget(self.settingsBtn, 0, 0, 1, 1, QtCore.Qt.AlignRight)
         self.passwordLE = QtWidgets.QLineEdit(self.centralwidget)
         self.passwordLE.setMinimumSize(QtCore.QSize(153, 0))
         self.passwordLE.setMaximumSize(QtCore.QSize(153, 16777215))
@@ -108,13 +109,11 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.reloadList()
-
         self.retranslateUi(MainWindow)
         self.addBtn.clicked.connect(self.addAction)
+        self.settingsBtn.clicked.connect(self.settings)
         self.deleteBtn.clicked.connect(self.remAction)
         self.connectBtn.clicked.connect(self.connectAction)
-        self.stayLogCB.clicked.connect(self.staylogAction)
         self.upBtn.clicked.connect(self.upList)
         self.downBtn.clicked.connect(self.downList)
         self.organiserBtn.clicked.connect(self.organizerLink)
@@ -132,83 +131,7 @@ class Ui_MainWindow(object):
         self.error_msg.setWindowIcon(self.icon)
 
         self.setImages()
-
-        if config["General"]["retro_mode"] == "True":
-            MainWindow.setStyleSheet("""
-                QPushButton{
-                        background-color:transparent;
-                    }
-
-                QCheckBox::indicator:unchecked{
-                        image: url('res/dr/checkbox_uc.jpg')
-                    }
-                QCheckBox::indicator:checked{
-                        image: url('res/dr/checkbox_c.jpg')
-                    }
-                
-                QListWidget::indicator:unchecked{
-                        image: url('res/dr/checkbox_uc.jpg')
-                    }
-                QListWidget::indicator:checked{
-                        image: url('res/dr/checkbox_c.jpg');
-                    }
-
-                QListWidget{
-                        background-color: transparent;
-                        border-style: outset;
-                        border-color: transparent;
-                    }
-
-                QLineEdit{
-                        background-color:transparent;
-                        border-style: outset;
-                        border-color:transparent;
-                    }
-
-                #MainWindow{
-                        background-image:url('res/dr/bg.jpg');
-                    }
-                """)
-        else:
-            MainWindow.setStyleSheet("""
-                QPushButton{
-                        background-color:transparent;
-                    }
-
-                QCheckBox::indicator:unchecked{
-                        image: url('res/d2/checkbox_uc.jpg')
-                    }
-                QCheckBox::indicator:checked{
-                        image: url('res/d2/checkbox_c.jpg')
-                    }
-                
-                QListWidget::indicator:unchecked{
-                        image: url('res/d2/checkbox_uc.jpg')
-                    }
-                QListWidget::indicator:checked{
-                        image: url('res/d2/checkbox_c.jpg');
-                    }
-
-                QListWidget{
-                        background-color: transparent;
-                        border-style: outset;
-                        border-color: transparent;
-                    }
-
-                QLineEdit{
-                        background-color:transparent;
-                        border-style: outset;
-                        border-color:transparent;
-                    }
-
-                QLabel,QCheckBox,QLineEdit,QListWidget::item{
-                        color:white;
-                    }
-
-                #MainWindow{
-                        background-image:url('res/d2/bg.jpg');
-                    }
-                """)
+        self.reloadList()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -225,8 +148,6 @@ class Ui_MainWindow(object):
         #self.connectBtn.setText(_translate("MainWindow", "Connecter !"))
         self.deleteBtn.setToolTip(_translate("MainWindow", "Supprime le compte sélectionné"))
         #self.deleteBtn.setText(_translate("MainWindow", "Supprimer"))
-        self.stayLogCB.setToolTip(_translate("MainWindow", "Reste connecté à Ankama Launcher après la connexion à Dofus"))
-        self.stayLogCB.setText(_translate("MainWindow", "Rester co"))
         #self.upBtn.setText(_translate("MainWindow", "▲"))
         self.upBtn.setToolTip(_translate("MainWindow", "Monte le compte sélectionné dans la liste"))
         #self.downBtn.setText(_translate("MainWindow", "▼"))
@@ -246,11 +167,12 @@ class Ui_MainWindow(object):
         self.upBtn.setCursor(QtCore.Qt.PointingHandCursor)
         self.downBtn.setIcon(QtGui.QIcon('res/down.png'))
         self.downBtn.setCursor(QtCore.Qt.PointingHandCursor)
-        self.stayLogCB.setCursor(QtCore.Qt.PointingHandCursor)
+        self.settingsBtn.setIcon(QtGui.QIcon('res/settings.png'))
+        self.settingsBtn.setCursor(QtCore.Qt.PointingHandCursor)
 
     def settings(self):
-        settings_window = SettingsWindow()
-        settings_widow.show()
+        settings_window.show()
+        settings_window.reload()
 
     def addAction(self):
         savelogsThread = saveLogs()
@@ -323,14 +245,86 @@ class Ui_MainWindow(object):
         for acc in config['Accounts']:
             self.listWidget.createItems(upper_str(acc))
 
-        self.stayLogCB.setChecked(False)
-        if config["General"]["stay_logged"] == "True":
-            self.stayLogCB.setChecked(True)
+        if config["General"]["retro_mode"] == "True":
+            MainWindow.setStyleSheet("""
+                QPushButton{
+                        background-color:transparent;
+                    }
 
-    def staylogAction(self):
-        config.set("General","stay_logged", str(self.stayLogCB.isChecked()))
-        with open('config.ini', 'w') as configfile:
-            config.write(configfile)
+                QCheckBox::indicator:unchecked{
+                        image: url('res/dr/checkbox_uc.jpg');
+                    }
+                QCheckBox::indicator:checked{
+                        image: url('res/dr/checkbox_c.jpg');
+                    }
+                
+                QListWidget::indicator:unchecked{
+                        image: url('res/dr/checkbox_uc.jpg')
+                    }
+                QListWidget::indicator:checked{
+                        image: url('res/dr/checkbox_c.jpg');
+                    }
+
+                QListWidget{
+                        background-color: transparent;
+                        border-style: outset;
+                        border-color: transparent;
+                    }
+
+                QLineEdit{
+                        background-color:transparent;
+                        border-style: outset;
+                        border-color:transparent;
+                    }
+
+                QLabel,QCheckBox,QLineEdit,QListWidget::item{
+                        color:black;
+                    }
+
+                #MainWindow{
+                        background-image:url('res/dr/bg.jpg');
+                    }
+                """)
+        else:
+            MainWindow.setStyleSheet("""
+                QPushButton{
+                        background-color:transparent;
+                    }
+
+                QCheckBox::indicator:unchecked{
+                        image: url('res/d2/checkbox_uc.jpg');
+                    }
+                QCheckBox::indicator:checked{
+                        image: url('res/d2/checkbox_c.jpg');
+                    }
+                
+                QListWidget::indicator:unchecked{
+                        image: url('res/d2/checkbox_uc.jpg');
+                    }
+                QListWidget::indicator:checked{
+                        image: url('res/d2/checkbox_c.jpg');
+                    }
+
+                QListWidget{
+                        background-color: transparent;
+                        border-style: outset;
+                        border-color: transparent;
+                    }
+
+                QLineEdit{
+                        background-color:transparent;
+                        border-style: outset;
+                        border-color:transparent;
+                    }
+
+                QLabel,QCheckBox,QLineEdit,QListWidget::item{
+                        color:white;
+                    }
+
+                #MainWindow{
+                        background-image:url('res/d2/bg.jpg');
+                    }
+                """)
 
     def upList(self):
         try:
@@ -375,10 +369,10 @@ class Ui_MainWindow(object):
         
 class SettingsWindow(QtWidgets.QWidget):
     def __init__(self, parent=None):
-        super(LoadWindow,self).__init__(parent=parent)
+        super(SettingsWindow,self).__init__(parent=parent)
 
         self.width = 255
-        self.height = 70
+        self.height = 40
         self.left = screenSize.width() / 2 - self.width / 2
         self.top = screenSize.height() / 2 - self.height / 2
 
@@ -386,47 +380,132 @@ class SettingsWindow(QtWidgets.QWidget):
 
     def setup(self):
         "Initialise la fenêtre"
-        self.setWindowTitle(windowTitle + " - v1.0")
+        self.setObjectName("SettingsWindow")
+        self.setWindowIcon(QtGui.QIcon("res/icon.ico"))
+        self.setWindowTitle(df_windowTitle + " - v" + df_version)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        self.setFixedSize(self.size())
+        #self.setFixedSize(self.size())
         
         self.createGrid()
         self.constructGrid()
         self.setupEvents()
 
-        self.setLayout(self.grid)
+        self.reload()
 
-        self.show()
+        self.setLayout(self.grid)
 
     def createGrid(self):
         "Créer la grille"
-        self.saveNameLbl = QtWidgets.QLabel("Nom de la sauvegarde :")
-        self.saveNameTB = QtWidgets.QLineEdit(self)
+        self.title = QtWidgets.QLabel("Paramètres")
+        self.title.setAlignment(QtCore.Qt.AlignRight)
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        font.setBold(True)
+        font.setWeight(75)
+        self.title.setFont(font)
 
-        self.loadBtn = QtWidgets.QPushButton("Charger une partie !", self)
-        self.newBtn = QtWidgets.QPushButton("Créer une partie !", self)
-        self.newBtn.setDefault(True)
+        self.image = QtWidgets.QLabel(self)
+        pixmap = QtGui.QPixmap('res/settings.png')
+        self.image.setPixmap(pixmap)
 
+        self.stayLogCB = QtWidgets.QCheckBox()
+        self.stayLogCB.setObjectName("stayLogCB")
+        self.stayLogCB.setToolTip("Reste connecté à Ankama Launcher après la connexion à Dofus")
+        self.stayLogCB.setText("Rester co")
+        self.stayLogCB.setCursor(QtCore.Qt.PointingHandCursor)
+        
+        self.upperAccountsCB = QtWidgets.QCheckBox()
+        self.upperAccountsCB.setObjectName("upperAccountsCB")
+        self.upperAccountsCB.setToolTip("Met une majuscule au début du nom dans la liste des comptes")
+        self.upperAccountsCB.setText("Majuscule au début")
+        self.upperAccountsCB.setCursor(QtCore.Qt.PointingHandCursor)
 
+        self.retroModeCB = QtWidgets.QCheckBox()
+        self.retroModeCB.setObjectName("retroModeCB")
+        self.retroModeCB.setToolTip("Pour Dofus Retro ou non")
+        self.retroModeCB.setText("Dofus Retro")
+        self.retroModeCB.setCursor(QtCore.Qt.PointingHandCursor)
 
         self.grid = QtWidgets.QGridLayout()
 
     def constructGrid(self):
         "Affiche les widgets"
-        self.grid.addWidget(self.saveNameLbl,0,0)
-        self.grid.addWidget(self.saveNameTB,0,1)
-        self.grid.addWidget(self.loadBtn,1,0)
-        self.grid.addWidget(self.newBtn,1,1)
+        self.grid.addWidget(self.title,0,0)
+        self.grid.addWidget(self.image,0,1)
+        self.grid.addWidget(self.stayLogCB,1,0)
+        self.grid.addWidget(self.upperAccountsCB,1,1)
+        self.grid.addWidget(self.retroModeCB,2,0)
 
     def setupEvents(self):
         "Créer les événements des boutons"
-        self.loadBtn.clicked.connect(self.charger)
-        self.newBtn.clicked.connect(self.creer)
+        self.stayLogCB.clicked.connect(self.staylogAction)
+        self.upperAccountsCB.clicked.connect(self.upperAccountsAction)
+        self.retroModeCB.clicked.connect(self.retroModeAction)
+
+    def staylogAction(self):
+        config.set("General","stay_logged", str(self.stayLogCB.isChecked()))
+        with open('config.ini', 'w') as configfile:
+            config.write(configfile)
+    def upperAccountsAction(self):
+        config.set("General","upper_accounts", str(self.upperAccountsCB.isChecked()))
+        with open('config.ini', 'w') as configfile:
+            config.write(configfile)
+    def retroModeAction(self):
+        config.set("General","retro_mode", str(self.retroModeCB.isChecked()))
+        with open('config.ini', 'w') as configfile:
+            config.write(configfile)
+        self.reload()
+
+    def reload(self):
+        if config["General"]["retro_mode"] == "True":
+            self.setStyleSheet("""
+                QCheckBox::indicator:unchecked{
+                        image: url('res/dr/checkbox_uc.jpg');
+                    }
+                QCheckBox::indicator:checked{
+                        image: url('res/dr/checkbox_c.jpg');
+                    }
+
+                #SettingsWindow{
+                        background-color: #d5cfab;
+                    }
+                """)
+        else:
+            self.setStyleSheet("""
+                QCheckBox::indicator:unchecked{
+                        image: url('res/d2/checkbox_uc.jpg');
+                    }
+                QCheckBox::indicator:checked{
+                        image: url('res/d2/checkbox_c.jpg');
+                    }
+
+                QLabel,QCheckBox{
+                        color:white;
+                    }
+
+                #SettingsWindow{
+                        background-color: #181119;
+                    }
+                """)
+
+        self.stayLogCB.setChecked(False)
+        if config["General"]["stay_logged"] == "True":
+            self.stayLogCB.setChecked(True)
+        self.upperAccountsCB.setChecked(False)
+        if config["General"]["upper_accounts"] == "True":
+            self.upperAccountsCB.setChecked(True)
+        self.retroModeCB.setChecked(False)
+        if config["General"]["retro_mode"] == "True":
+            self.retroModeCB.setChecked(True)
+
+        ui.reloadList()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(argv)
+    screenSize = app.desktop().screenGeometry()
     MainWindow = DofLogWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    settings_window = SettingsWindow()
     MainWindow.show()
     exit(app.exec_())

@@ -506,6 +506,11 @@ def setup_config():
         rename("up.png", "res/up.png")
     elif exists("up.png"):
         remove("up.png")
+        
+    if not exists("res/settings.png"):
+        rename("settings.png", "res/settings.png")
+    elif exists("settings.png"):
+        remove("settings.png")
 
     if not exists("res/icon.ico"):
         rename("icon.ico", "res/icon.ico")
