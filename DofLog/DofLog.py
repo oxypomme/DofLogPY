@@ -213,13 +213,13 @@ class logDof(Thread):
             Lance Dofus et retourne son processid
         """
         self.__focusOnWindow(title="Ankama Launcher")
-        if not self.__retro_mode:
-            moveTo(395, 270) # Clique sur l'onglet Dofus
-        else:
-            moveTo(395,330) # Clique sur l'onglet Dofus Retro
-        sleep(1)
-        click()
         while True:
+            if not self.__retro_mode:
+                moveTo(395, 65) # Clique sur l'onglet Dofus
+            else:
+                moveTo(395,325) # Clique sur l'onglet Dofus Retro
+            sleep(0.5)
+            click()
             # Vérifie si le programme peut lancer Dofus
             if self.__isLogable(1380,742) == (255,255,255):
                 break
@@ -263,7 +263,9 @@ class logDof(Thread):
         self.__focusOnWindow(title="Ankama Launcher")
         moveTo(1535, 205) # Postition de la gestion de compte sur AL
         click()
-        moveTo(1380, 625) # Postition du bouton deconnexion sur AL
+        while self.__isLogable(1380,530) == (255,255,255):
+            sleep(1)
+        moveTo(1380, 530) # Postition du bouton deconnexion sur AL
         click()
         self.__focusOnWindow(id=dofWinID)
 
@@ -336,7 +338,7 @@ class toasterWin10(Thread):
         while self.isRunning:
             if self.isShowing:
                 old_msg = self.message
-                self.__toaster.show_toast(df_windowTitle, self.message, "icon.ico", 3)
+                self.__toaster.show_toast(df_windowTitle, self.message, "res/icon.ico", 3)
                 if old_msg == self.message:
                     self.message = ""
                     self.isShowing = False
@@ -363,28 +365,34 @@ class DiscordRPC(Thread):
         else:
             self.DRPCisEnabled = True
             while(not self.isStopped): 
-                try:
+                if True:
+                    nameList = "Se connecte..."
                     if(self.timeBuffer == 5):
                         nbDof = 0
-                        nameList = "Se connecte..."
                         namePerso = self.__countWindows()
                         sizePerso = len(namePerso)
                         if sizePerso >= 1:
-                            nameList = ""
                             for i in range(sizePerso):
                                 if not "Dofus" in namePerso[i][0]:
                                     nameList+=namePerso[i][0]
                                     nbDof+=1
                                     if not i == sizePerso - 1:
                                         nameList+=", "
+                                else:
+                                    nameList = "Se connecte..."
                         self.timeBuffer = 0
                     else:
                         self.timeBuffer+=1
 
+                    modifier = ""
+                    if config["General"]["retro_mode"] == "True":
+                        modifier = "retro"
+
+                    message = "Joue avec 0 comptes :"
                     if nbDof > 1 or nbDof == 0:
-                        message = "Joue avec {0} comptes :".format(nbDof)
+                        message = "Joue avec {0} comptes {1} :".format(nbDof, modifier)
                     else:
-                        message = "Joue avec 1 compte :"
+                        message = "Joue avec 1 compte {0} :".format(modifier)
 
                     self.RPC.update(details=message, \
                                     large_image="header", \
@@ -392,7 +400,7 @@ class DiscordRPC(Thread):
                                     small_text="Dofus", \
                                     state=nameList, \
                                     start=self.startTime)
-                except:
+                else:
                     # En cas de déconnexion
                     self.run()
                     self.DRPCisEnabled = False
