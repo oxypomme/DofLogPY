@@ -356,7 +356,7 @@ class SettingsWindow(QtWidgets.QWidget):
         super(SettingsWindow,self).__init__(parent=parent)
 
         self.width = 255
-        self.height = 40
+        self.height = 80
         self.left = screenSize.width() / 2 - self.width / 2
         self.top = screenSize.height() / 2 - self.height / 2
 
@@ -368,7 +368,7 @@ class SettingsWindow(QtWidgets.QWidget):
         self.setWindowIcon(QtGui.QIcon("res/icon.ico"))
         self.setWindowTitle(df_windowTitle + " - v" + df_version)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        #self.setFixedSize(self.size())
+        self.setFixedSize(self.size())
         
         self.createGrid()
         self.constructGrid()
