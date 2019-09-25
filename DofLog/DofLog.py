@@ -217,6 +217,7 @@ class logDof(Thread):
             moveTo(395, 270) # Clique sur l'onglet Dofus
         else:
             moveTo(395,330) # Clique sur l'onglet Dofus Retro
+        sleep(1)
         click()
         while True:
             # Vérifie si le programme peut lancer Dofus
@@ -357,13 +358,10 @@ class DiscordRPC(Thread):
         try:
             self.RPC = Presence(int(bytearray.fromhex('363233383936373835363035333631363634').decode()))
             self.RPC.connect()
-            print("PRESENCE ON")
         except (InvalidPipe):
             self.DRPCisEnabled = False
-            print("INVALID PIPE")
         else:
             self.DRPCisEnabled = True
-            print("VALID PIPE")
             while(not self.isStopped): 
                 try:
                     if(self.timeBuffer == 5):
@@ -388,19 +386,16 @@ class DiscordRPC(Thread):
                     else:
                         message = "Joue avec 1 compte :"
 
-                    print("RPC UPDATE ?")
                     self.RPC.update(details=message, \
                                     large_image="header", \
                                     small_image="dofuslogo", \
                                     small_text="Dofus", \
                                     state=nameList, \
                                     start=self.startTime)
-                    print("RPC UPDATED")
                 except:
                     # En cas de déconnexion
                     self.run()
                     self.DRPCisEnabled = False
-                    print("NOT VALID PIPE !")
                 sleep(1)
 
     def __countWindows(self):
@@ -536,5 +531,5 @@ toaster_thread = toasterWin10()
 toaster_thread.start()
 
 discord_thread = DiscordRPC()
-#discord_thread.start()
+discord_thread.start()
 
