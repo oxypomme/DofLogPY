@@ -265,20 +265,10 @@ class Ui_MainWindow(object):
                         image: url('res/dr/checkbox_c.jpg');
                     }
 
-                QListWidget{
+                QListWidget, QLineEdit{
                         background-color: transparent;
                         border-style: outset;
                         border-color: transparent;
-                    }
-
-                QLineEdit{
-                        background-color:transparent;
-                        border-style: outset;
-                        border-color:transparent;
-                    }
-
-                QLabel,QCheckBox,QLineEdit,QListWidget::item{
-                        color:black;
                     }
 
                 #MainWindow{
@@ -305,16 +295,10 @@ class Ui_MainWindow(object):
                         image: url('res/d2/checkbox_c.jpg');
                     }
 
-                QListWidget{
+                QListWidget, QLineEdit{
                         background-color: transparent;
                         border-style: outset;
                         border-color: transparent;
-                    }
-
-                QLineEdit{
-                        background-color:transparent;
-                        border-style: outset;
-                        border-color:transparent;
                     }
 
                 QLabel,QCheckBox,QLineEdit,QListWidget::item{
@@ -450,6 +434,7 @@ class SettingsWindow(QtWidgets.QWidget):
         config.set("General","upper_accounts", str(self.upperAccountsCB.isChecked()))
         with open('config.ini', 'w') as configfile:
             config.write(configfile)
+        self.reload()
     def retroModeAction(self):
         config.set("General","retro_mode", str(self.retroModeCB.isChecked()))
         with open('config.ini', 'w') as configfile:
