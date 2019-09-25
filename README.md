@@ -27,6 +27,8 @@ C'est pourquoi j'ai développé `DofLog`, un outil pour se connecter automatique
 ![Header](https://oxypomme.github.io/res/doflog/header.gif)\
 <font size="2">*DofLog dans sa version 1.0.0*</font>
 
+Les fonctionnalités diverses sont détaillées sur le [site web](https://oxypomme.github.io/DofLog).
+
 ## Installation
 
 ```md

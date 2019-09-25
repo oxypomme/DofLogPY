@@ -366,8 +366,8 @@ class DiscordRPC(Thread):
             self.DRPCisEnabled = True
             while(not self.isStopped): 
                 if True:
-                    nameList = "Se connecte..."
                     if(self.timeBuffer == 5):
+                        nameList = ""
                         nbDof = 0
                         namePerso = self.__countWindows()
                         sizePerso = len(namePerso)
@@ -380,6 +380,8 @@ class DiscordRPC(Thread):
                                         nameList+=", "
                                 else:
                                     nameList = "Se connecte..."
+                        else:
+                            nameList = "Se connecte..."
                         self.timeBuffer = 0
                     else:
                         self.timeBuffer+=1
