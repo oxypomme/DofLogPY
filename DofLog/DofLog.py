@@ -113,7 +113,7 @@ class logDof(Thread):
             Retourne la couleur du pixel indiqué
         """
         color = ImageGrab.grab((startX, startY, startX + 1, startY + 1)).load()[0,0]
-        print("{0}:{1} | {2}".format(startX, startY, color)) # debug purpose
+        #print("{0}:{1} | {2}".format(startX, startY, color)) # debug purpose
         return color
 
     ### ECRITURE DU MOT DE PASSE ###

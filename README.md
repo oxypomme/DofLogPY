@@ -2,7 +2,7 @@
 
 > DofLog est un outil de connexion automatique pour Dofus 64bits développé en Python.
 
-<img src="DofLog/res/icon.ico" alt="drawing" width="100"/>
+<img src="DofLog/src/icon.png" alt="drawing" width="100"/>
 
 - [DofLog](#doflog)
   - [Pourquoi faire](#pourquoi-faire)
@@ -24,8 +24,8 @@ Mais pour cela il existe des outils, notamment le [nAiO](https://naio.fr/), de Z
 
 C'est pourquoi j'ai développé `DofLog`, un outil pour se connecter automatiquement à Dofus en passant par l'Ankama Launcher !
 
-![Header](header.png)\
-<font size="2">*DofLog dans sa version 0.1.3*</font>
+![Header](https://oxypomme.github.io/res/doflog/header.png)\
+<font size="2">*DofLog dans sa version 1.0.0*</font>
 
 ## Installation
 
@@ -75,7 +75,7 @@ J'utilise [SemVer](http://semver.org/) pour le versioning. Pour la liste complè
 
 ## Historique des Versions
 
-- 0.1.3
+- 1.0.0
   - Integration Discord Presence
   - Mise à jour graphique
   - Intégration Dofus Retro
