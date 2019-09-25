@@ -24,7 +24,7 @@ Mais pour cela il existe des outils, notamment le [nAiO](https://naio.fr/), de Z
 
 C'est pourquoi j'ai développé `DofLog`, un outil pour se connecter automatiquement à Dofus en passant par l'Ankama Launcher !
 
-![Header](https://oxypomme.github.io/res/doflog/header.png)\
+![Header](https://oxypomme.github.io/res/doflog/header.gif)\
 <font size="2">*DofLog dans sa version 1.0.0*</font>
 
 ## Installation
