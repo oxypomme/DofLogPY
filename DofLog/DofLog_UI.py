@@ -244,30 +244,6 @@ class Ui_MainWindow(object):
         self.listWidget.clear()
         for acc in config['Accounts']:
             self.listWidget.createItems(upper_str(acc))
-            if config["General"]["retro_mode"] == "True":
-                self.listWidget.setStyleSheet("""
-                    QListWidget::indicator:unchecked{
-                            image: url('res/dr/checkbox_uc.jpg');
-                        }
-                    QListWidget::indicator:checked{
-                            image: url('res/dr/checkbox_c.jpg');
-                        }
-                    QListWidget::item{
-                            color:black;
-                        }
-                """)
-            else:
-                self.listWidget.setStyleSheet("""
-                    QListWidget::indicator:unchecked{
-                            image: url('res/d2/checkbox_uc.jpg');
-                        }
-                    QListWidget::indicator:checked{
-                            image: url('res/d2/checkbox_c.jpg');
-                        }
-                    QListWidget::item{
-                            color:white;
-                        }
-                """)
 
         if config["General"]["retro_mode"] == "True":
             self.nameLbl.setStyleSheet("QLabel{color:black;}")
@@ -288,6 +264,17 @@ class Ui_MainWindow(object):
                         background-image:url('res/dr/bg.jpg');
                     }
                 """)
+            self.listWidget.setStyleSheet("""
+                    QListWidget::indicator:unchecked{
+                            image: url('res/dr/checkbox_uc.jpg');
+                        }
+                    QListWidget::indicator:checked{
+                            image: url('res/dr/checkbox_c.jpg');
+                        }
+                    QListWidget::item{
+                            color:black;
+                        }
+                """)
         else:
             self.nameLbl.setStyleSheet("QLabel{color:white;}")
             self.usernameLbl.setStyleSheet("QLabel{color:white;}")
@@ -306,6 +293,17 @@ class Ui_MainWindow(object):
                     background-image:url('res/d2/bg.jpg');
                     }
             """)
+            self.listWidget.setStyleSheet("""
+                    QListWidget::indicator:unchecked{
+                            image: url('res/d2/checkbox_uc.jpg');
+                        }
+                    QListWidget::indicator:checked{
+                            image: url('res/d2/checkbox_c.jpg');
+                        }
+                    QListWidget::item{
+                            color:white;
+                        }
+                """)
 
     def upList(self):
         try:
