@@ -244,25 +244,38 @@ class Ui_MainWindow(object):
         self.listWidget.clear()
         for acc in config['Accounts']:
             self.listWidget.createItems(upper_str(acc))
+            if config["General"]["retro_mode"] == "True":
+                self.listWidget.setStyleSheet("""
+                    QListWidget::indicator:unchecked{
+                            image: url('res/dr/checkbox_uc.jpg');
+                        }
+                    QListWidget::indicator:checked{
+                            image: url('res/dr/checkbox_c.jpg');
+                        }
+                    QListWidget::item{
+                            color:black;
+                        }
+                """)
+            else:
+                self.listWidget.setStyleSheet("""
+                    QListWidget::indicator:unchecked{
+                            image: url('res/d2/checkbox_uc.jpg');
+                        }
+                    QListWidget::indicator:checked{
+                            image: url('res/d2/checkbox_c.jpg');
+                        }
+                    QListWidget::item{
+                            color:white;
+                        }
+                """)
 
         if config["General"]["retro_mode"] == "True":
+            self.nameLbl.setStyleSheet("QLabel{color:black;}")
+            self.usernameLbl.setStyleSheet("QLabel{color:black;}")
+            self.passwordLbl.setStyleSheet("QLabel{color:black;}")
             MainWindow.setStyleSheet("""
                 QPushButton{
                         background-color:transparent;
-                    }
-
-                QCheckBox::indicator:unchecked{
-                        image: url('res/dr/checkbox_uc.jpg');
-                    }
-                QCheckBox::indicator:checked{
-                        image: url('res/dr/checkbox_c.jpg');
-                    }
-                
-                QListWidget::indicator:unchecked{
-                        image: url('res/dr/checkbox_uc.jpg')
-                    }
-                QListWidget::indicator:checked{
-                        image: url('res/dr/checkbox_c.jpg');
                     }
 
                 QListWidget, QLineEdit{
@@ -276,23 +289,12 @@ class Ui_MainWindow(object):
                     }
                 """)
         else:
+            self.nameLbl.setStyleSheet("QLabel{color:white;}")
+            self.usernameLbl.setStyleSheet("QLabel{color:white;}")
+            self.passwordLbl.setStyleSheet("QLabel{color:white;}")
             MainWindow.setStyleSheet("""
                 QPushButton{
                         background-color:transparent;
-                    }
-
-                QCheckBox::indicator:unchecked{
-                        image: url('res/d2/checkbox_uc.jpg');
-                    }
-                QCheckBox::indicator:checked{
-                        image: url('res/d2/checkbox_c.jpg');
-                    }
-                
-                QListWidget::indicator:unchecked{
-                        image: url('res/d2/checkbox_uc.jpg');
-                    }
-                QListWidget::indicator:checked{
-                        image: url('res/d2/checkbox_c.jpg');
                     }
 
                 QListWidget, QLineEdit{
@@ -300,15 +302,10 @@ class Ui_MainWindow(object):
                         border-style: outset;
                         border-color: transparent;
                     }
-
-                QLabel,QCheckBox,QLineEdit,QListWidget::item{
-                        color:white;
-                    }
-
                 #MainWindow{
-                        background-image:url('res/d2/bg.jpg');
+                    background-image:url('res/d2/bg.jpg');
                     }
-                """)
+            """)
 
     def upList(self):
         try:
