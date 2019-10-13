@@ -215,9 +215,9 @@ class logDof(Thread):
         self.__focusOnWindow(title="Ankama Launcher")
         while True:
             if not self.__retro_mode:
-                moveTo(395, 65) # Clique sur l'onglet Dofus
+                moveTo(395, 265) # Clique sur l'onglet Dofus
             else:
-                moveTo(395,325) # Clique sur l'onglet Dofus Retro
+                moveTo(395, 325) # Clique sur l'onglet Dofus Retro
             sleep(0.5)
             click()
             # Vérifie si le programme peut lancer Dofus
@@ -265,7 +265,7 @@ class logDof(Thread):
         click()
         while self.__isLogable(1380,530) == (255,255,255):
             sleep(1)
-        moveTo(1380, 530) # Postition du bouton deconnexion sur AL
+        moveTo(1380, 580) # Postition du bouton deconnexion sur AL
         click()
         self.__focusOnWindow(id=dofWinID)
 
