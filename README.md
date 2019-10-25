@@ -1,8 +1,10 @@
 # DofLog
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+
 > DofLog est un outil de connexion automatique pour Dofus 64bits développé en Python.
 
-<img src="DofLog/src/icon.png" alt="drawing" width="100"/>
+<img src="https://rawcdn.githack.com/oxypomme/DofLog/148f76df2c41563abd80346559aab6575423e064/DofLog/src/icon.png" alt="drawing" width="100"/>
 
 - [DofLog](#doflog)
   - [Pourquoi faire](#pourquoi-faire)
