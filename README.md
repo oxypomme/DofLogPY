@@ -1,10 +1,11 @@
 # DofLog
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+[![version](https://img.shields.io/github/v/release/oxypomme/DofLog?label=Version&style=for-the-badge)](https://shields.io)
+<a href="https://forthebadge.com/"><img src="https://forthebadge.com/images/badges/made-with-python.svg" alt="forthebadge" height="28"/></a>
 
 > DofLog est un outil de connexion automatique pour Dofus 64bits développé en Python.
 
-<img src="https://rawcdn.githack.com/oxypomme/DofLog/148f76df2c41563abd80346559aab6575423e064/DofLog/src/icon.png" alt="drawing" width="100"/>
+<img src="https://rawcdn.githack.com/oxypomme/DofLog/148f76df2c41563abd80346559aab6575423e064/DofLog/src/icon.png" alt="drawing" width="124"/>
 
 - [DofLog](#doflog)
   - [Pourquoi faire](#pourquoi-faire)
@@ -13,7 +14,6 @@
   - [Versioning](#versioning)
   - [Historique des Versions](#historique-des-versions)
   - [Auteur](#auteur)
-  - [Licence](#licence)
   - [Contribute](#contribute)
   - [Remerciements](#remerciements)
 
@@ -104,9 +104,7 @@ J'utilise [SemVer](http://semver.org/) pour le versioning. Pour la liste complè
 
 Lisez la liste des [contributeurs](https://github.com/oxypomme/DofLog/contributors) qui ont participé à ce projet.
 
-## Licence
-
-[MIT Licence](https://github.com/oxypomme/DofLog/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/oxypomme/DofLog?style=for-the-badge)](https://github.com/oxypomme/DofLog/blob/master/LICENSE)
 
 ## Contribute
 
@@ -120,3 +118,4 @@ Lisez la liste des [contributeurs](https://github.com/oxypomme/DofLog/contributo
 
 - Le [nAiO](https://naio.fr/), de ZDS, pour son concept.
 - [Dofus](https://dofus.com/fr), développé par Ankama, pour continuer à nous amusez après tant d'années.
+- [shields.io](https://shields.io) and [ForTheBadge](https://forthebadge.com) for those quality badges.
