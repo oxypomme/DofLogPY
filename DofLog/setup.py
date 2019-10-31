@@ -1,5 +1,3 @@
-from DofLog import df_version
-
 import sys
 import pkg_resources
 from os.path import join, basename
@@ -37,11 +35,11 @@ def collect_dist_info(packages):
 executable = [Executable(script="DofLog_UI.py",
                          base = "Win32GUI", 
                          targetName="DofLog.exe", 
-                         icon="res/icon.ico")
+                         icon="res_build/icon.ico")
                ]
 
 setup(name='DofLog',
-      version=df_version,
+      version="1.0.0",
       description="DofLog",
       options={
         "build_exe": {
