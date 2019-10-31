@@ -188,7 +188,7 @@ class logDof(Thread):
         """
             Se connecte à L'Ankama Launcher avec le premier compte
         """
-        while not self.__isLogable(650,525) == (24,44,58):
+        while not self.__isLogable(652,265) == (249, 250, 250): # Vérifie si il est écrit "Connexion"
             sleep(1)
         moveTo(620, 340) # Position du champ "Nom de compte" de l'AL
         click()
@@ -221,10 +221,10 @@ class logDof(Thread):
             sleep(0.5)
             click()
             # Vérifie si le programme peut lancer Dofus
-            if self.__isLogable(1380,742) == (255,255,255):
+            if self.__isLogable(1385,763) == (255,255,255):
                 break
             sleep(1)
-        moveTo(1380,742) # Lance Dofus
+        moveTo(1385,763) # Lance Dofus
         click()
         while not "Dofus" in win32gui.GetWindowText(win32gui.GetForegroundWindow()):
             # Tant que dofus n'est pas au premier plan
@@ -263,9 +263,9 @@ class logDof(Thread):
         self.__focusOnWindow(title="Ankama Launcher")
         moveTo(1535, 205) # Postition de la gestion de compte sur AL
         click()
-        while self.__isLogable(1380,530) == (255,255,255):
+        while self.__isLogable(1382,486) == (255,255,255):
             sleep(1)
-        moveTo(1380, 580) # Postition du bouton deconnexion sur AL
+        moveTo(1382, 486) # Postition du bouton deconnexion sur AL
         click()
         self.__focusOnWindow(id=dofWinID)
 
