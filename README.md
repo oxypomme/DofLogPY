@@ -1,5 +1,6 @@
 # DofLog
 
+[![download](https://img.shields.io/github/downloads/oxypomme/DofLog/total?style=for-the-badge)](https://shields.io)
 [![version](https://img.shields.io/github/v/release/oxypomme/DofLog?label=Version&style=for-the-badge)](https://shields.io)
 <a href="https://forthebadge.com/"><img src="https://forthebadge.com/images/badges/made-with-python.svg" alt="forthebadge" height="28"/></a>
 
@@ -42,8 +43,6 @@ Pendant ce temps, cliquez sur la petite roue dentée (Paramètres) et
     Vérifiez qu'a la réduction d'Ankama Launcher, il se réduise dans la barre des tâches.
 Déconnectez vous.
 ```
-
-> **Note :** Evitez de bouger la fenêtre de l'[Ankama Launcher](https://www.ankama.com/fr/launcher)
 
 Téléchargez la dernière version dans l'onglet [releases](https://github.com/oxypomme/DofLog/releases).
 
