@@ -21,7 +21,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputBaseFilename=DofLog_setup
+OutputBaseFilename=DofLog-setup
 Compression=lzma
 SolidCompression=yes
 
