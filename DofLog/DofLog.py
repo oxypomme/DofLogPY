@@ -51,9 +51,9 @@ class logDof(Thread):
             toastMessage = "Pas de comptes enregistrés !"
         else:
             self.__startAL()
-            isLog = self.__isLogable(650,525) # Vérifie si le programme peut se connecter à AL
-            if not (isLog == (134,182,68) or isLog == (133,181,68)):
-                self.__logAL(usernames[0],passwords[0])
+            while not (self.__isLogable(530,625) == (59, 89, 152)): # Vérifie si le programme peut se connecter à AL
+                sleep(1)
+            self.__logAL(usernames[0],passwords[0])
             dofIDs.append(self.__startDof())
             if not self.__retro_mode:
                 while not self.__isLogable(1200,835) == (214,246,0):
@@ -61,8 +61,6 @@ class logDof(Thread):
                     if self.__isLogable(955,585) == (214,246,0):
                         # Vérifie si le programme peut lancer Dofus
                         self.__logDof(dofIDs[0],usernames[0],passwords[0])
-                    else:
-                        sleep(1)
             else:
                 # Lance Dofus Retro
                 self.__logDof(dofIDs[0],usernames[0],passwords[0])
@@ -113,7 +111,7 @@ class logDof(Thread):
             Retourne la couleur du pixel indiqué
         """
         color = ImageGrab.grab((startX, startY, startX + 1, startY + 1)).load()[0,0]
-        #print("{0}:{1} | {2}".format(startX, startY, color)) # debug purpose
+        print("{0}:{1} | {2}".format(startX, startY, color)) # debug purpose
         return color
 
     ### ECRITURE DU MOT DE PASSE ###
@@ -263,9 +261,9 @@ class logDof(Thread):
         self.__focusOnWindow(title="Ankama Launcher")
         moveTo(1535, 205) # Postition de la gestion de compte sur AL
         click()
-        while self.__isLogable(1382,486) == (255,255,255):
+        while self.__isLogable(1385,600) == (255,255,255):
             sleep(1)
-        moveTo(1382, 486) # Postition du bouton deconnexion sur AL
+        moveTo(1385,600) # Postition du bouton deconnexion sur AL
         click()
         self.__focusOnWindow(id=dofWinID)
 
