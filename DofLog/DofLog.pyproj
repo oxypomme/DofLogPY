@@ -29,12 +29,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DofLog_UI_raw.py" />
-    <Compile Include="setup.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.ini" />
+    <Content Include="DofLog_UI.spec" />
     <Content Include="DofLog_UI.ui" />
     <Content Include="res\icon.ico" />
   </ItemGroup>
