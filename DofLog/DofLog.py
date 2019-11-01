@@ -17,7 +17,7 @@ PAUSE = 0.25 # Pause entre chaque action
 FAILSAFE = True # Si la souris est bougé vers le coin en haut à gauche de l'écran le programme
                 # s'arrête
 df_windowTitle = "DofLog"
-df_version = "1.0.0"
+df_version = "1.0.1"
 
 config = ConfigParser() # Fichier config
 class AccountNotFoundError(Exception):

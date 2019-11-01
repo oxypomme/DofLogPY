@@ -137,20 +137,13 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", df_windowTitle + " - v" + df_version))
         self.passwordLbl.setText(_translate("MainWindow", "Mot de passe :"))
-        #self.organiserBtn.setText(_translate("MainWindow", "Organiser
-        #(nAiO)"))
         self.organiserBtn.setToolTip(_translate("MainWindow", "Lance l'Organiser (nAiO)"))
-        #self.addBtn.setText(_translate("MainWindow", "Ajouter"))
         self.addBtn.setToolTip(_translate("MainWindow", "Ajoute le compte dans le fichier sauvegarde"))
         self.usernameLbl.setText(_translate("MainWindow", "Nom de compte :"))
         self.nameLbl.setText(_translate("MainWindow", "Nom du raccourci :"))
         self.connectBtn.setToolTip(_translate("MainWindow", "Connecte le/les compte(s) sélectionné(s)"))
-        #self.connectBtn.setText(_translate("MainWindow", "Connecter !"))
         self.deleteBtn.setToolTip(_translate("MainWindow", "Supprime le compte sélectionné"))
-        #self.deleteBtn.setText(_translate("MainWindow", "Supprimer"))
-        #self.upBtn.setText(_translate("MainWindow", "▲"))
         self.upBtn.setToolTip(_translate("MainWindow", "Monte le compte sélectionné dans la liste"))
-        #self.downBtn.setText(_translate("MainWindow", "▼"))
         self.downBtn.setToolTip(_translate("MainWindow", "Descend le compte sélectionné dans la liste"))
 
     def setImages(self):
@@ -288,6 +281,7 @@ class Ui_MainWindow(object):
                         background-color: transparent;
                         border-style: outset;
                         border-color: transparent;
+                        color: white;
                     }
                 #MainWindow{
                     background-image:url('res/d2/bg.jpg');

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "DofLog"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "oxypomme"
 #define MyAppURL "https://oxypomme.github.io/DofLog"
 #define MyAppExeName "DofLog.exe"
